@@ -433,62 +433,28 @@
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Dashboard -->
 <li class="nav-item l active">
-    <a class="nav-link k" href="doctordashboard.php" style="color: white;">
+    <a class="nav-link k" href="nursedashboard.php" style="color: white;">
         <i class="fas fa-fw fa-tachometer-alt" style="font-size:16px"></i>
         <span>Dashboard</span>
     </a>
 </li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <li class="nav-item l " style="padding:0px;">
-    <a class="nav-link k" href="doctorupdatemeals.php" style="color: white;">
+    <a class="nav-link k" href="nursemeals.php" style="color: white;">
         <i class="fas  fa-procedures" style="font-size:16px"></i>
         <span>Daily Updates - Meals</span>
     </a>
 </li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <li class="nav-item l " style="padding:0px;">
-    <a class="nav-link k" href="doctorupdatemedication.php" style="color: white;">
+    <a class="nav-link k" href="nursemedicine.php" style="color: white;">
         <i class="fas  fa-procedures" style="font-size:16px"></i>
         <span>Daily Updates - Medicine</span>
     </a>
 </li>
 <!-- Divider -->
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
-<!-- Nav Item - Master -->
-<!-- <li class="nav-item l master">
-    <a class="nav-link k collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo" style="color: white;">
-        <i class="fas fa-fw fa-clipboard-list" style="font-size:16px"></i>
-        <span>Master</span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="z-index: 1000;">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item " href="customer.php" style="color: black;">Customer</a>
-            <a class="collapse-item " href="employee.php" style="color: black;">Employee</a>
-            <a class="collapse-item" href="designation.php" style="color: black;">Designation</a>
-            <a class="collapse-item" href="projecttype.php" style="color: black;">Project Type</a>
-            <a class="collapse-item" href="followuptype.php" style="color: black;">FollowUp Type</a>
-        </div>
-    </div>
-</li>  -->
-<!-- Divider -->
-<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
-<!-- Nav Item - Project Creation -->
-<li class="nav-item l">
-    <a class="nav-link k" href="visitfeedback.php" style="color: black;">
-        <i class="fas  fa-user-nurse" style="font-size:16px"></i>
-        <span>Visit Feedback</span>
-    </a>
-</li>
-<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
-<!-- Nav Item - Daily Updates -->
-<li class="nav-item l">
-    <a class="nav-link k" href="surgeryupdates.php" style="color: black;">
-        <i class="fas fa-user-md" style="font-size:16px"></i>
-        <span>Surgery Updates</span>
-    </a>
-</li>
-<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
+
 <!-- Nav Item - Work Reports -->
 <!-- <li class="nav-item l">
     <a class="nav-link k" href="reports.php" style="color: black;">
@@ -785,13 +751,13 @@
 <div class="square-box"> 
     <div class="stats-box">
         <i class="fas fa-user-md" style="font-size: 20px;"></i>
-        <h1 style="font-size: 20px;">Dr. Rajesh P</h1>
+        <h1 style="font-size: 20px;">Mrs. N. Kavitha</h1>
         <small>Name</small>
     </div>
     <div class="stats-box">
         <i class="fas fa-user-nurse" style="font-size: 20px;"></i>
-        <h1 style="font-size: 20px;">Cardiology</h1>
-        <small>Specialization</small>
+        <h1 style="font-size: 20px;">Dr. Rajesh</h1>
+        <small>Works Under</small>
     </div>
     <div class="stats-box">
         <i class="fas fa-procedures" style="font-size: 20px;"></i>
@@ -800,8 +766,8 @@
     </div>
     <div class="stats-box">
         <i class="fas fa-chart-line" style="font-size: 20px;"></i>
-        <h1 style="font-size: 20px;">99.99%</h1>
-        <small>Success Rate</small>
+        <h1 style="font-size: 20px;">2</h1>
+        <small>Years of Working</small>
     </div>
 </div>  
 
