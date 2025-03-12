@@ -769,10 +769,23 @@
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>
                             <td>{$sno}</td>
-                            <td>{$row['datetime']}</td>
-                            <td>{$row['description']}</td>
-                            <td>{$row['proof']}</td>
-                            <td></td>
+                            
+                    <td>{$row['datetime']}</td>
+                    <td>{$row['description']}</td>
+                    <td><img src='{$row['proof']}' width='50' height='50'></td>
+                    <td id='action_{$row['ID']}'>";
+
+            if ($status == "Taken" || $status == "Missed") {
+                echo "<span class='status-text'>{$status}</span>"; // Display status if already set
+            } else {
+                echo "<i class='fas fa-check-circle text-success action-icon' 
+                        onclick='updateStatus1({$row['ID']}, \"Taken\")' 
+                        style='cursor: pointer; font-size: 18px;'></i>
+                      <i class='fas fa-times-circle text-danger action-icon' 
+                        onclick='updateStatus1({$row['ID']}, \"Missed\")' 
+                        style='cursor: pointer; font-size: 18px; margin-left: 10px;'></i>";
+            }
+            echo "</td>
 
                             
                 </tr>";
@@ -1522,6 +1535,41 @@ $(document).ready(function () {
             if (result.isConfirmed) {
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST", "update_status.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        Swal.fire({
+                            title: "Updated!",
+                            text: xhr.responseText,
+                            icon: "success"
+                        });
+
+                        // Replace icons with the status text
+                        let actionCell = document.getElementById("action_" + id);
+                        if (actionCell) {
+                            actionCell.innerHTML = `<span class='status-text'>${status}</span>`;
+                        }
+                    }
+                };
+                xhr.send("id=" + id + "&status=" + status);
+            }
+        });
+    }
+</script>
+<script>
+    function updateStatus1(id, status) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to mark this as " + status + "?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, confirm!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "update_status1.php", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4 && xhr.status == 200) {
