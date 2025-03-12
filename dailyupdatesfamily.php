@@ -636,16 +636,18 @@
     <div class="container-fluid mt-4">
       <!-- Navigation Tabs -->
       <ul class="nav nav-pills custom-nav" id="reportTabs">
-    <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link active" id="employeeTab"  onclick="setActiveTab('employee')">
              Meals
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" id="projectTab"  onclick="setActiveTab('project')">
+      <li class="nav-item">
+        <a class="nav-link " id="projectTab"  onclick="setActiveTab('project')">
             Medication
         </a>
     </li>
+   
+    
 </ul>
 <style>
     /* Adjust font size for navigation tabs */
@@ -721,9 +723,7 @@
             <!-- Wrap the button inside a flex container -->
         <!-- Wrap the button inside a flex container -->
             <div class="d-flex export-container" style="justify-content: flex-end;">
-            <button style='background:green;' id="exportEmployeeExcel" class="btn btn-success export-btn" onclick="exportEmployeeReport()" title="Export Employee Report">
-    <i class="fa fa-file-alt"></i>&nbsp;&nbsp;Generate Report
-</button>
+         
 
             </div>
 
@@ -759,39 +759,38 @@
                 </tr>
               </thead>
               <tbody id="surgeryTableBody">
-            <?php
-        include("dbconn.php"); // Ensure database connection
+              <?php
+include("dbconn.php"); // Ensure database connection
 
-        $query = "SELECT * FROM dailyupdatesmeals ORDER BY ID DESC";
-        $result = mysqli_query($conn, $query);
-        $sno = 1;
+$query = "SELECT * FROM dailyupdatesmeals ORDER BY ID DESC";
+$result = mysqli_query($conn, $query);
+$sno = 1;
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>
-                            <td>{$sno}</td>
-                            
-                    <td>{$row['datetime']}</td>
-                    <td>{$row['description']}</td>
-                    <td><img src='{$row['proof']}' width='50' height='50'></td>
-                    <td id='action_{$row['ID']}'>";
+while ($row = mysqli_fetch_assoc($result)) {
+    $status = $row['status']; // Fetch status from database
+    echo "<tr>
+            <td>{$sno}</td>
+            <td>{$row['datetime']}</td>
+            <td>{$row['description']}</td>
+            <td><img src='{$row['proof']}' width='50' height='50'></td>
+            <td id='action_{$row['ID']}'>";
 
-            if ($status == "Taken" || $status == "Missed") {
-                echo "<span class='status-text'>{$status}</span>"; // Display status if already set
-            } else {
-                echo "<i class='fas fa-check-circle text-success action-icon' 
-                        onclick='updateStatus1({$row['ID']}, \"Taken\")' 
-                        style='cursor: pointer; font-size: 18px;'></i>
-                      <i class='fas fa-times-circle text-danger action-icon' 
-                        onclick='updateStatus1({$row['ID']}, \"Missed\")' 
-                        style='cursor: pointer; font-size: 18px; margin-left: 10px;'></i>";
-            }
-            echo "</td>
+    // If status is set, display it, otherwise show action buttons
+    if ($status == "Taken" || $status == "Missed") {
+        echo "<span class='status-text'>{$status}</span>"; 
+    } else {
+        echo "<i class='fas fa-check-circle text-success action-icon' 
+                onclick='updateStatus1({$row['ID']}, \"Taken\")' 
+                style='cursor: pointer; font-size: 18px;'></i>
+              <i class='fas fa-times-circle text-danger action-icon' 
+                onclick='updateStatus1({$row['ID']}, \"Missed\")' 
+                style='cursor: pointer; font-size: 18px; margin-left: 10px;'></i>";
+    }
+    echo "</td></tr>";
+    $sno++;
+}
+?>
 
-                            
-                </tr>";
-            $sno++;
-        }
-        ?>
             </tbody>
             </table>
           </div>
@@ -804,9 +803,7 @@
                     <div class="d-flex flex-wrap align-items-center filter-group">
                       
                         <div class="d-flex export-container" style="justify-content: flex-end;">
-                        <button style='background:green;' id="exportProjectExcel" class="btn btn-primary export-btn" onclick="exportProjectReport()" title="Export Project Report">
-    <i class="fa fa-file-alt"></i>&nbsp;&nbsp;Generate Report
-</button>
+                     
                         </div>
                     </div>
                 </div>
@@ -931,254 +928,37 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script> -->
 
- <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Initialize DataTable
-    var table = $('#dataTable').DataTable();
-
-    // Event delegation to handle dynamically generated rows
-    document.querySelector('#dataTable tbody').addEventListener('click', function (event) {
-        let clickedCell = event.target.closest('td');
-        if (!clickedCell) return;
-
-        // Get the search input field from DataTables
-        const searchBox = document.querySelector('input[type="search"]');
-
-        // Get column index of the clicked cell
-        const colIndex = clickedCell.cellIndex;
-
-        // Define column indexes
-        const nameCol = 1; // "Name" column
-        const dateCol = 2; // "Date" column
-        const companyCol = 3;
-        const typeCol=4; // "Company - Title" column
-
-        if ([nameCol, dateCol, companyCol,typeCol].includes(colIndex)) {
-            // Get clean text without extra spaces or new lines
-            let searchText = clickedCell.textContent.replace(/\s+/g, ' ').trim();
-
-            // Update search box
-            searchBox.value = searchText;
-
-            // Trigger DataTables search
-            table.search(searchText).draw();
-        }else {
-            // If clicked column is not Date, Company-Title, or Type, open the PDF
-            window.location.href = "requirement.php";
-        }
-    });
-});
-
-</script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    // Initialize DataTable
-    var table = $('#projectTable').DataTable();
-    // Event delegation for dynamic table updates
-    document.querySelector('#projectTable tbody').addEventListener('click', function (event) {
-        let clickedCell = event.target.closest('td'); // Get the clicked <td>
-        if (!clickedCell) return;
+    function setActiveTab(tab) {
+    // Remove active class from all tabs
+    document.getElementById("projectTab").classList.remove("active");
+    document.getElementById("employeeTab").classList.remove("active");
 
-        // Get the search input field from DataTables
-        const searchBox = document.querySelector('input[type="search"]');
+    // Hide both reports
+    document.getElementById("projectReport").style.display = "none";
+    document.getElementById("employeeReport").style.display = "none";
 
-        // Get column index of the clicked cell
-        const colIndex = clickedCell.cellIndex;
+    // Show the selected report and mark tab as active
+    if (tab === "project") {
+        document.getElementById("projectTab").classList.add("active");
+        document.getElementById("projectReport").style.display = "block";
+    } else if (tab === "employee") {
+        document.getElementById("employeeTab").classList.add("active");
+        document.getElementById("employeeReport").style.display = "block";
+    }
+}
 
-        // Define searchable columns
-        const dateCol = 1; // "Date" column
-        const companyCol = 2; // "Company-Title" column
-        const typeCol = 3; // "Type" column
-
-        if ([dateCol, companyCol, typeCol].includes(colIndex)) {
-            // Get clean text without extra spaces or new lines
-            let searchText = clickedCell.textContent.replace(/\s+/g, ' ').trim();
-
-            // Update search box
-            searchBox.value = searchText;
-
-            // Trigger DataTables search
-            table.search(searchText).draw();
-        } else {
-            // If clicked column is not Date, Company-Title, or Type, open the PDF
-            window.location.href = "requirement.php";
-        }
-    });
-});
 </script>
+ 
 <!-- ######### EMPLOYEE REPORT ########## -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    var table = $('#dataTable').DataTable();
 
-    // Function to update Total Days and Actual Days across all pages
-    function updateDays() {
-        let searchValue = document.querySelector('input[type="search"]').value.trim();
-        if (searchValue === "") {
-            $("#totalDays").text(0);
-            $("#actualDays").text(0);
-            return;
-        }
-
-        let totalDaysMap = new Map(); // Store total days for unique Company-Title
-        let actualHours = 0;
-
-        // Loop through **all rows in the dataset**, not just the displayed ones
-        table.rows({ search: 'applied' }).every(function () {
-            let row = this.data(); // Get row data
-            let companyTitle = row[3].trim(); // Get Company-Title column (adjust index if needed)
-            let totalDaysValue = parseFloat(row[9].trim()) || 0; // Get Total Days column (adjust index if needed)
-            let actualHrs = row[7].trim(); // Get Actual Hours column
-
-            if (companyTitle) {
-                if (!totalDaysMap.has(companyTitle)) {
-                    totalDaysMap.set(companyTitle, totalDaysValue);
-                }
-            }
-            if (actualHrs && actualHrs !== "-") {
-                actualHours += parseFloat(actualHrs);
-            }
-        });
-
-        // Sum all total days from unique Company-Title
-        let totalDaysSum = Array.from(totalDaysMap.values()).reduce((sum, days) => sum + days, 0);
-
-        $("#totalDays").text(totalDaysSum); // Display summed total days
-        $("#actualDays").text((actualHours / 8).toFixed(2)); // Divide actual hours by 8
-    }
-
-    // Search input event
-    document.querySelector('input[type="search"]').addEventListener('keyup', function () {
-        table.search(this.value).draw();
-        setTimeout(updateDays, 200); // Update days after search
-    });
-
-    // Date filter event
-    function filterByDate() {
-        table.draw();
-        setTimeout(updateDays, 200); // Update days after filtering
-    }
-
-    document.getElementById('startDateEmployee').addEventListener('change', filterByDate);
-    document.getElementById('endDateEmployee').addEventListener('change', filterByDate);
-
-    // Custom DataTable filtering function
-    $.fn.dataTable.ext.search.push(
-        function (settings, data, dataIndex) {
-            let min = document.getElementById('startDateEmployee').value;
-            let max = document.getElementById('endDateEmployee').value;
-            let date = data[2]; // Column index for 'Date'
-            
-            // Convert date format to YYYY-MM-DD
-            let dateParts = date.split('-');
-            let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-            let tableDate = new Date(formattedDate);
-            
-            if ((min === "" || new Date(min) <= tableDate) && (max === "" || new Date(max) >= tableDate)) {
-                return true;
-            }
-            return false;
-        }
-    );
-
-    // Ensure updateDays is called after filtering
-    table.on('draw', function () {
-        updateDays();
-    });
-
-    updateDays(); // Call initially to set the correct values
-});
-
-</script>
 <!-- ######### PROJECT REPORT ########## -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var table = $('#projectTable').DataTable();
 
-        // Function to update Total Days and Work Days across all pages
-        function updateDays() {
-            let totalDaysSum = 0;
-            let workDaysSum = 0;
-            let companyTotalDays = {}; // Object to store unique company total days
-
-            // Check if the search bar is empty
-            let searchValue = document.querySelector('input[type="search"]').value.trim();
-            if (searchValue === "") {
-                $("#totalProjectDays").text(0); // Reset total days
-                $("#actualProjectDays").text(0); // Reset work days
-                return; // Stop execution
-            }
-
-            // Loop through all filtered rows, regardless of pagination
-            table.rows({ search: 'applied' }).data().each(function (row) {
-                let companyTitle = row[2].trim(); // Get Company Title column
-                let totalDaysValue = parseFloat(row[6].trim()) || 0; // Get Total Days column
-                let workDaysValue = parseFloat(row[7].trim()) || 0; // Get Work Days column
-
-                if (!companyTotalDays[companyTitle]) {
-                    companyTotalDays[companyTitle] = totalDaysValue;
-                    totalDaysSum += totalDaysValue;
-                }
-                workDaysSum += workDaysValue;
-            });
-
-            $("#totalProjectDays").text(totalDaysSum); // Display summed total days
-            $("#actualProjectDays").text(workDaysSum); // Display summed work days
-        }
-
-        // Search input event
-        document.querySelector('input[type="search"]').addEventListener('keyup', function () {
-            table.search(this.value).draw();
-            setTimeout(updateDays, 200); // Update days after search
-        });
-
-        // Date filter event
-        function filterByDate() {
-            table.draw();
-            setTimeout(updateDays, 200); // Update days after filtering
-        }
-
-        document.getElementById('startDateProject').addEventListener('change', filterByDate);
-        document.getElementById('endDateProject').addEventListener('change', filterByDate);
-
-        // Custom DataTable filtering function
-        $.fn.dataTable.ext.search.push(
-            function (settings, data, dataIndex) {
-                let min = document.getElementById('startDateProject').value;
-                let max = document.getElementById('endDateProject').value;
-                let date = data[1]; // Column index for 'Date'
-
-                // Convert date format to YYYY-MM-DD
-                let dateParts = date.split('-');
-                let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-                let tableDate = new Date(formattedDate);
-
-                if ((min === "" || new Date(min) <= tableDate) && (max === "" || new Date(max) >= tableDate)) {
-                    return true;
-                }
-                return false;
-            }
-        );
-
-        // Ensure updateDays is called after filtering and pagination changes
-        table.on('draw', function () {
-            updateDays();
-        });
-
-        updateDays(); // Call initially to set the correct values
-    });
-</script>
 
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                       <h6> <b>Copyright &copy; Knock the Globe Technologies 2025</b></h6>
-                    </div>
-                </div>
-            </footer>
+            
             <!-- End of Footer -->
 
         </div>
@@ -1421,30 +1201,7 @@ $(document).ready(function () {
 });
 
 </script>
-<script>
-    $(document).ready(function () {
-    var table = $('#dataTable').DataTable();
 
-    // Get URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const company = urlParams.get('company');
-    const projectType = urlParams.get('projectType');
-    const projectTitle = urlParams.get('projectTitle');
-
-    // Check which parameter exists and apply search
-    if (company) {
-        table.search(company).draw();
-        $('#searchInput').val(company); // Set search bar value
-    } else if (projectType) {
-        table.search(projectType).draw();
-        $('#searchInput').val(projectType); // Set search bar value
-    } else if (projectTitle) {
-        table.search(projectTitle).draw();
-        $('#searchInput').val(projectTitle); // Set search bar value
-    }
-});
-
-</script>
 <script>
 $(document).ready(function () {
     loadPatients(); // Fetch data when the page loads
@@ -1557,39 +1314,49 @@ $(document).ready(function () {
     }
 </script>
 <script>
-    function updateStatus1(id, status) {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You want to mark this as " + status + "?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, confirm!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                let xhr = new XMLHttpRequest();
-                xhr.open("POST", "update_status1.php", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
+  function updateStatus1(id, status) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You want to mark this as " + status + "?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, confirm!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "update_status1.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let response = JSON.parse(xhr.responseText);
+                    if (response.success) {
                         Swal.fire({
                             title: "Updated!",
-                            text: xhr.responseText,
+                            text: "Status updated successfully.",
                             icon: "success"
                         });
 
-                        // Replace icons with the status text
+                        // Update UI
                         let actionCell = document.getElementById("action_" + id);
                         if (actionCell) {
-                            actionCell.innerHTML = `<span class='status-text'>${status}</span>`;
+                            actionCell.innerHTML = `<span class='status-text'>${response.status}</span>`;
                         }
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: response.error,
+                            icon: "error"
+                        });
                     }
-                };
-                xhr.send("id=" + id + "&status=" + status);
-            }
-        });
-    }
+                }
+            };
+            xhr.send("id=" + id + "&status=" + status);
+        }
+    });
+}
+
 </script>
 
 

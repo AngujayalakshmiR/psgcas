@@ -12,11 +12,24 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     if ($count > 0) {
         while ($row = $result->fetch_assoc()) {
             $tableData .= "<tr>
-                            <td>{$sno}</td>
-                            <td>{$row['datetime']}</td>
-                            <td>{$row['description']}</td>
-                            <td>{$row['proof']}</td>
-                            <td></td>
+                           <td>{$sno}</td>
+            <td>{$row['datetime']}</td>
+            <td>{$row['description']}</td>
+            <td><img src='{$row['proof']}' width='50' height='50'></td>
+            <td id='action_{$row['ID']}'>";
+
+    // If status is set, display it, otherwise show action buttons
+    if ($status == "Taken" || $status == "Missed") {
+        echo "<span class='status-text'>{$status}</span>"; 
+    } else {
+        echo "<i class='fas fa-check-circle text-success action-icon' 
+                onclick='updateStatus1({$row['ID']}, \"Taken\")' 
+                style='cursor: pointer; font-size: 18px;'></i>
+              <i class='fas fa-times-circle text-danger action-icon' 
+                onclick='updateStatus1({$row['ID']}, \"Missed\")' 
+                style='cursor: pointer; font-size: 18px; margin-left: 10px;'></i>";
+    }
+    echo "</td>
                         </tr>";
             $sno++;
         }
