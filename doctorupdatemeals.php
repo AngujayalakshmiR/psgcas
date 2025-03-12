@@ -428,7 +428,7 @@
     </a>
 </li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
-<li class="nav-item l " style="padding:0px;">
+<li class="nav-item l active" style="padding:0px;">
     <a class="nav-link k" href="doctorupdatemeals.php" style="color: white;">
         <i class="fas  fa-procedures" style="font-size:16px"></i>
         <span>Daily Updates - Meals</span>
@@ -463,7 +463,7 @@
 <!-- Divider -->
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Project Creation -->
-<li class="nav-item l active">
+<li class="nav-item l ">
     <a class="nav-link k" href="visitfeedback.php" style="color: black;">
         <i class="fas  fa-user-nurse" style="font-size:16px"></i>
         <span>Visit Feedback</span>
@@ -471,7 +471,7 @@
 </li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Daily Updates -->
-<li class="nav-item l">
+<li class="nav-item l ">
     <a class="nav-link k" href="surgeryupdates.php" style="color: black;">
         <i class="fas fa-user-md" style="font-size:16px"></i>
         <span>Surgery Updates</span>
@@ -498,254 +498,93 @@
 </nav>
 
 <div class="container-fluid">
-<div class="container mb-4 mt-4" style="background: white; border-radius: 25px; border: 2px solid rgb(0, 148, 255);">
-<div class="column">
-    <div class="row">
-        <!-- Left Section (20% width for the button) -->
-       
-        <!-- Right Section (80% width for form fields) -->
-        <div class="col-md-12">
-    <form id="customerForm" class="row g-3 mt-3">
-        <div class="col-md-4 pb-1">
-           
-            <input type="text" class="form-control mb-2" id="date" placeholder="Enter Date" required>
+<br>
+<br>
 
-        </div>
+<?php
+include("dbconn.php"); // Ensure database connection
 
-        <div class="col-md-4 pb-1">
-        <input type="text" class="form-control mb-2" id="time" placeholder="Enter Time" required>
-        </div>
+$query = "SELECT ID, datetime, proof, status, description FROM dailyupdatesmeals ORDER BY ID DESC";
+$result = mysqli_query($conn, $query);
+?>
 
-        <div class="col-md-4 pb-1">
-        <input type="text" class="form-control mb-2" id="feedback" placeholder="Enter Report" required>
-    </div>
-    </form>
-</div>
-    </div></div>
-<div class="column">
-    <div class="pb-2 d-flex justify-content-sm-end justify-content-center align-items-center">
-        <button type="submit" class="btn" id="reportbtn"
-            style="background: rgb(0, 148, 255); border-radius: 25px; color: white;">
-            <i class="fas fa-user"></i>&nbsp; Add Report
-        </button>
-</div>
-
-</div></div>
-<script>
-    $(document).ready(function () {
-    // Restrict numbers in text fields
-    $("#customername, #companyname, #stateInput, #districtInput").on("input", function () {
-        $(this).val($(this).val().replace(/\d/g, '')); // Remove numbers
-    });
-
-    // Allow only numbers in phone number and pincode fields
-    $("#customerno, #pincode").on("input", function () {
-        $(this).val($(this).val().replace(/\D/g, '')); // Remove non-numeric characters
-    });
-
-    // Validate form on submit
-    $("#customerForm").submit(function (e) {
-        e.preventDefault(); // Prevent form submission if validation fails
-
-        let isValid = true;
-        let phoneNumber = $("#customerno").val();
-        let pincode = $("#pincode").val();
-        
-        // Phone number validation (10 digits)
-        if (!/^\d{10}$/.test(phoneNumber)) {
-            alert("Please enter a valid 10-digit phone number.");
-            isValid = false;
-        }
-
-        // Pincode validation (6 digits)
-        if (!/^\d{6}$/.test(pincode)) {
-            alert("Please enter a valid 6-digit pincode.");
-            isValid = false;
-        }
-
-        if (isValid) {
-            this.submit(); // Submit the form if all validations pass
-        }
-    });
-});
-
-</script>
-
-<script>
-// List of states and districts for India
-const statesAndDistricts = {
-   "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", "Chittoor", "Anantapur", "East Godavari", "West Godavari", "Prakasam", "Srikakulam", "Kadapa", "Krishna", "Rayalaseema"],
-"Arunachal Pradesh": ["Itanagar", "Tawang", "Ziro", "Pasighat", "West Kameng", "East Kameng", "Lower Subansiri", "Upper Subansiri", "West Siang", "East Siang", "Lohit", "Namsai"],
-"Assam": ["Guwahati", "Silchar", "Dibrugarh", "Tezpur", "Jorhat", "Nagaon", "Barpeta", "Bongaigaon", "Karimganj", "Sonitpur", "Sivasagar", "Cachar", "Kokrajhar", "Morigaon"],
-"Bihar": ["Patna", "Gaya", "Muzaffarpur", "Bhagalpur", "Darbhanga", "Purnia", "Nalanda", "Samastipur", "Begusarai", "Saran", "Vaishali", "Madhubani", "Katihar", "Araria"],
-"Chhattisgarh": ["Raipur", "Bilaspur", "Durg", "Korba", "Jagdalpur", "Rajnandgaon", "Surguja", "Koriya", "Raigarh", "Jashpur"],
-"Goa": ["North Goa", "South Goa"],
-"Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar", "Bhavnagar", "Jamnagar", "Anand", "Kutch", "Sabarkantha", "Patan", "Junagadh"],
-"Haryana": ["Gurugram", "Faridabad", "Panipat", "Ambala", "Hisar", "Karnal", "Rewari", "Sonipat", "Fatehabad", "Sirsa", "Jhajjar"],
-"Himachal Pradesh": ["Shimla", "Kullu", "Manali", "Dharamshala", "Solan", "Mandi", "Kangra", "Bilaspur", "Hamirpur", "Kullu", "Una", "Chamba"],
-"Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Hazaribagh", "Dumka", "Giridih", "Jamtara", "Deoghar", "Ramgarh"],
-"Karnataka": ["Bengaluru", "Mysore", "Hubli", "Mangalore", "Belagavi", "Tumkur", "Udupi", "Dakshina Kannada", "Hassan", "Kodagu", "Bijapur", "Bidar", "Chikkaballapur", "Chikkamagaluru"],
-"Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Kottayam", "Malappuram", "Palakkad", "Ernakulam", "Kollam", "Pathanamthitta", "Alappuzha", "Idukki"],
-"Madhya Pradesh": ["Bhopal", "Indore", "Gwalior", "Jabalpur", "Ujjain", "Sagar", "Katni", "Khandwa", "Hoshangabad", "Rewa", "Satna", "Dewas", "Vidisha"],
-"Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Thane", "Aurangabad", "Kolhapur", "Solapur", "Nanded", "Amravati", "Chandrapur", "Jalna"],
-"Manipur": ["Imphal", "Churachandpur", "Thoubal", "Bishnupur", "Ukhrul", "Senapati", "Tamenglong", "Chandel", "Kangpokpi"],
-"Meghalaya": ["Shillong", "Tura", "Jowai", "Nongstoin", "East Khasi Hills", "West Khasi Hills", "Ri Bhoi", "South West Khasi Hills"],
-"Mizoram": ["Aizawl", "Lunglei", "Champhai", "Serchhip", "Kolasib", "Mamit"],
-"Nagaland": ["Kohima", "Dimapur", "Mokokchung", "Tuensang", "Mon", "Peren", "Wokha"],
-"Odisha": ["Bhubaneswar", "Cuttack", "Puri", "Sambalpur", "Rourkela", "Berhampur", "Bargarh", "Ganjam", "Balasore", "Dhenkanal"],
-"Punjab": ["Amritsar", "Ludhiana", "Patiala", "Jalandhar", "Bathinda", "Mohali", "Gurdaspur", "Firozpur", "Mansa", "Sangrur"],
-"Rajasthan": ["Jaipur", "Udaipur", "Jodhpur", "Kota", "Ajmer", "Bikaner", "Sikar", "Alwar", "Bharatpur", "Pali"],
-"Sikkim": ["Gangtok", "Namchi", "Mangan", "Gyalshing"],
-"Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Salem", "Vellore", "Tirunelveli", "Erode", "Dindigul", "Karur", "Tanjore", "Thoothukudi", "Kanyakumari", "Cuddalore", "Villupuram", "Theni", "Ramanathapuram", "Nilgiris", "Virudhunagar", "Perambalur", "Krishnagiri", "Ariyalur", "Namakkal", "Pudukottai", "Sivaganga"],
-"Telangana": ["Hyderabad", "Warangal", "Karimnagar", "Nizamabad", "Khammam", "Mahabubnagar", "Adilabad", "Nalgonda", "Rangareddy", "Medak"],
-"Tripura": ["Agartala", "Udaipur", "Dharmanagar", "Kailashahar"],
-"Uttar Pradesh": ["Lucknow", "Kanpur", "Varanasi", "Noida", "Agra", "Meerut", "Ghaziabad", "Allahabad", "Bareilly", "Aligarh", "Moradabad", "Saharanpur", "Firozabad", "Muzaffarnagar"],
-"Uttarakhand": ["Dehradun", "Haridwar", "Nainital", "Almora", "Udham Singh Nagar", "Pauri Garhwal", "Tehri Garhwal", "Champawat"],
-"West Bengal": ["Kolkata", "Darjeeling", "Siliguri", "Howrah", "Asansol", "Durgapur", "Malda", "Purulia", "Bankura", "Nadia"],
-"Andaman and Nicobar Islands": ["Port Blair"],
-"Chandigarh": ["Chandigarh"],
-"Dadra and Nagar Haveli and Daman and Diu": ["Daman", "Diu", "Silvassa"],
-"Lakshadweep": ["Kavaratti"],
-"Delhi": ["Central Delhi", "East Delhi", "South Delhi", "West Delhi"],
-"Puducherry": ["Pondicherry", "Karaikal", "Mahe", "Yanam"],
-"Jammu and Kashmir": ["Srinagar", "Jammu", "Anantnag", "Baramulla", "Kupwara", "Poonch", "Rajouri", "Kathua"],
-"Ladakh": ["Leh", "Kargil"]
-
-};
-
-// List of all 195 countries
-const countries = [
-    "India", "United States", "United Kingdom", "Canada", "Australia", "Germany", "France", "China", "Japan", "Brazil",
-    "Russia", "South Korea", "Italy", "Spain", "Mexico", "Indonesia", "Netherlands", "Saudi Arabia", "Turkey", "Switzerland",
-    "South Africa", "Sweden", "Argentina", "Poland", "Belgium", "Norway", "Thailand", "Ireland", "Austria", "Singapore",
-    "New Zealand", "Denmark", "Finland", "Malaysia", "Portugal", "Greece", "Czech Republic", "Israel", "United Arab Emirates",
-    "Vietnam", "Hungary", "Philippines", "Colombia", "Pakistan", "Chile", "Bangladesh", "Egypt", "Nigeria", "Ukraine",
-    "Peru", "Venezuela", "Kazakhstan", "Romania", "Algeria", "Ecuador", "Iraq", "Morocco", "Slovakia", "Belarus", "Serbia",
-    "Sri Lanka", "Croatia", "Lithuania", "Bulgaria", "Tunisia", "Slovenia", "Jordan", "Paraguay", "Uruguay", "Lebanon",
-    "Georgia", "Azerbaijan", "Panama", "Armenia", "Oman", "Bolivia", "Myanmar", "Luxembourg", "Cuba", "Sudan", "Afghanistan",
-    "Nepal", "Honduras", "Costa Rica", "North Macedonia", "Estonia", "El Salvador", "Cyprus", "Jamaica", "Latvia", "Bahrain",
-    "Trinidad and Tobago", "Iceland", "Botswana", "Namibia", "Mauritius", "Montenegro", "Moldova", "Zambia", "Ethiopia",
-    "Ghana", "Senegal", "Cameroon", "Madagascar", "Tanzania", "Kenya", "Mozambique", "Fiji", "Malta", "Bosnia and Herzegovina",
-    "Gabon", "Burkina Faso", "Benin", "Guatemala", "Laos", "Papua New Guinea", "Uganda", "Mongolia", "Brunei", "Togo", "Nicaragua",
-    "Seychelles", "Congo", "Malawi", "Suriname", "Maldives", "Somalia", "Eswatini", "Bhutan", "Guyana", "Belize", "Chad",
-    "Burundi", "Mauritania", "Sierra Leone", "Lesotho", "Guinea", "Djibouti", "Comoros", "Liberia", "Saint Lucia", "Saint Vincent",
-    "Grenadines", "Sao Tome and Principe", "Samoa", "Solomon Islands", "Vanuatu", "Gambia"
-];
-
-// Populate Country Dropdown
-let countryDropdown = document.getElementById("country");
-countries.forEach(country => {
-    let option = document.createElement("option");
-    option.value = country;
-    option.textContent = country;
-    countryDropdown.appendChild(option);
-});
-
-// Populate State Dropdown (for India)
-let stateDropdown = document.getElementById("stateDropdown");
-for (let state in statesAndDistricts) {
-    let option = document.createElement("option");
-    option.value = state;
-    option.textContent = state;
-    stateDropdown.appendChild(option);
-}
-
-// Handle State Selection
-stateDropdown.addEventListener("change", function() {
-    let selectedState = this.value;
-    let districtDropdown = document.getElementById("districtDropdown");
-    districtDropdown.innerHTML = '<option value="">Select District</option>';
-
-    if (selectedState && statesAndDistricts[selectedState]) {
-        statesAndDistricts[selectedState].forEach(district => {
-            let option = document.createElement("option");
-            option.value = district;
-            option.textContent = district;
-            districtDropdown.appendChild(option);
-        });
-    }
-});
-
-// Handle Country Selection
-countryDropdown.addEventListener("change", function() {
-    let country = this.value;
-    let stateDropdown = document.getElementById("stateDropdown");
-    let stateInput = document.getElementById("stateInput");
-    let districtDropdown = document.getElementById("districtDropdown");
-    let districtInput = document.getElementById("districtInput");
-
-    if (country === "India") {
-        stateDropdown.classList.remove("d-none");
-        stateInput.classList.add("d-none");
-        districtDropdown.classList.remove("d-none");
-        districtInput.classList.add("d-none");
-    } else {
-        stateDropdown.classList.add("d-none");
-        stateInput.classList.remove("d-none");
-        districtDropdown.classList.add("d-none");
-        districtInput.classList.remove("d-none");
-    }
-});
-
-</script>
-
-
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-        <div class="card-header py-3">
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
         <p class="m-0" style="font-size: 16px;color:rgb(23, 25, 28);font-style: normal;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     color: rgb(23, 25, 28);
     font-size: 16px;
-    font-weight: 500;"><b>Customer Details</b> 
-        <span class="header-counter">0</span>  <!-- Counter next to heading -->
-</p>
-       
+    font-weight: 500;"><b>Meal Updates</b>  <!-- Counter next to heading -->
+        </p>
     </div>
     <div class="card-body">
-    <div class="table-responsive">
-    <table class="table table-bordered text-center" style="font-size:14px;" id="dataTable" width="100%">
-    <thead>
-        <tr class="thead">
-            <th>S.no</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Feedback</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody id="feedbackTableBody">
-        <?php
-        include("dbconn.php"); // Ensure database connection
+        <div class="table-responsive">
+            <table class="table table-bordered text-center" style="font-size:14px;" id="medicationTable" width="100%">
+                <thead>
+                    <tr class="thead">
+                        <th>S.no</th>
+                        <th>Date & Time</th>
+                        <th>Proof</th>
+                        
+                        <th>Description</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+    <?php
+    $sno = 1;
+    while ($row = mysqli_fetch_assoc($result)) {
+        $proofImage = $row['proof']; // Assuming this stores the image filename or URL
+        echo "<tr>
+                <td>{$sno}</td>
+                <td>{$row['datetime']}</td>
+                <td>
+                    <a href='#' class='open-modal' data-toggle='modal' data-target='#imageModal' data-image='{$proofImage}'>
+                        <img src='{$proofImage}' alt='Proof' width='50' height='50' style='cursor: pointer;'>
+                    </a>
+                </td>
+                <td>{$row['description']}</td>
+                <td>{$row['status']}</td>
+              </tr>";
+        $sno++;
+    }
+    ?>
+</tbody>
 
-        $query = "SELECT * FROM visitfeedback ORDER BY ID DESC";
-        $result = mysqli_query($conn, $query);
-        $sno = 1;
-
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>
-                    <td>{$sno}</td>
-                    <td>{$row['date']}</td>
-                    <td>{$row['time']}</td>
-                    <td>{$row['feedback']}</td>
-                    <td class='action-buttons'>
-                        <button class='btn-action btn-edit' data-id='{$row['ID']}'><i class='fas fa-edit'></i></button>
-                        <button class='btn-action btn-delete' data-id='{$row['ID']}'><i class='fas fa-trash-alt' style='color: rgb(238, 153, 129);'></i></button>
-                    </td>
-                </tr>";
-            $sno++;
-        }
-        ?>
-    </tbody>
-</table>
-
+            </table>
+        </div>
     </div>
 </div>
-        </div>
+
 
     </div>
+<script>
+    $(document).ready(function () {
+    $(".open-modal").click(function () {
+        var imageUrl = $(this).data("image"); // Get image URL from `data-image`
+        $("#modalImage").attr("src", imageUrl); // Set modal image source
+    });
+});
+</script>
+
+    <!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Proof Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" alt="Proof Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
     <script src="vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap core JavaScript -->
@@ -830,32 +669,34 @@ countryDropdown.addEventListener("change", function() {
     });
 </script>
 <script>
-$(document).ready(function () {
-    loadFeedback(); // Fetch data when the page loads
+$(document).ready(function () { 
+    loadSurgeries(); // Fetch data when the page loads
 
-    $("#reportbtn").click(function (e) { 
+    $("#surgerybtn").click(function (e) { 
         e.preventDefault();
 
         // Validate form before sending AJAX request
-        if (!$("#customerForm")[0].checkValidity()) {
-            $("#customerForm")[0].reportValidity();
+        if (!$("#surgeryForm")[0].checkValidity()) {
+            $("#surgeryForm")[0].reportValidity();
             return;
         }
 
-        var feedbackData = {
-            date: $("#date").val(),
-            time: $("#time").val(),
-            feedback: $("#feedback").val(),
+        var surgeryData = {
+            surgeryid: $("#surgeryid").val(),
+            surgerydate: $("#surgerydate").val(),
+            surgerydesc: $("#surgerydesc").val(),
+            starttime: $("#starttime").val(),
+            endtime: $("#endtime").val()
         };
 
         $.ajax({
-            url: "visitFeedbackBackend.php",
+            url: "surgeryBackend.php",
             type: "POST",
-            data: feedbackData,
+            data: surgeryData,
             success: function (response) {
                 Swal.fire({
                     title: "Success!",
-                    text: "Feedback has been added successfully.",
+                    text: "Surgery record has been added successfully.",
                     icon: "success",
                     confirmButtonColor: "rgb(0, 148, 255)",
                     confirmButtonText: "OK"
@@ -863,42 +704,42 @@ $(document).ready(function () {
                     location.reload(); // ✅ Reload after confirmation
                 });
 
-                $("#customerForm")[0].reset();
+                $("#surgeryForm")[0].reset();
             }
         });
     });
 
-    function loadFeedback() { 
+    function loadSurgeries() { 
         $.ajax({
-            url: "visitFeedbackBackend.php",
+            url: "surgeryBackend.php",
             type: "GET",
             dataType: "json",
             success: function (data) {
-                if ($.fn.DataTable.isDataTable("#dataTable")) {
-                    $("#dataTable").DataTable().destroy(); 
+                if ($.fn.DataTable.isDataTable("#surgeryTable")) {
+                    $("#surgeryTable").DataTable().destroy(); 
                 }
 
                 if (data.count > 0) {
-                    $("#feedbackTableBody").html(data.tableData);
+                    $("#surgeryTableBody").html(data.tableData);
                 } else {
-                    $("#feedbackTableBody").html(`
+                    $("#surgeryTableBody").html(`
                         <tr>
-                            <td colspan="4" class="text-center">No feedback found</td>
+                            <td colspan="7" class="text-center">No surgeries found</td>
                         </tr>
                     `);
                 }
 
-                $("#dataTable").DataTable(); 
+                $("#surgeryTable").DataTable(); 
                 $(".header-counter").text(data.count);
             },
             error: function (xhr, status, error) {
-                console.error("Error fetching feedback:", error);
+                console.error("Error fetching surgeries:", error);
             }
         });
     }
 
     $(document).on("click", ".btn-delete", function () {
-        var feedbackId = $(this).data("id");
+        var surgeryId = $(this).data("id");
 
         Swal.fire({
             title: "Are you sure?",
@@ -912,13 +753,13 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "visitFeedbackBackend.php",
+                    url: "surgeryBackend.php",
                     type: "POST",
-                    data: { delete: true, id: feedbackId },
+                    data: { delete: true, id: surgeryId },
                     success: function () {
                         Swal.fire({
                             title: "Deleted!",
-                            text: "Feedback has been removed.",
+                            text: "Surgery record has been removed.",
                             icon: "success",
                             confirmButtonColor: "rgb(0, 148, 255)",
                             confirmButtonText: "OK"
@@ -932,43 +773,47 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".btn-edit", function () {
-        var feedbackId = $(this).data("id");
+        var surgeryId = $(this).data("id");
 
         $.ajax({
-            url: "visitFeedbackBackend.php",
+            url: "surgeryBackend.php",
             type: "POST",
-            data: { edit: true, id: feedbackId },
+            data: { edit: true, id: surgeryId },
             dataType: "json",
-            success: function (feedback) {
-                $("#date").val(feedback.date);
-                $("#time").val(feedback.time);
-                $("#feedback").val(feedback.feedback);
+            success: function (surgery) {
+                $("#surgeryid").val(surgery.surgeryid);
+                $("#surgerydate").val(surgery.surgerydate);
+                $("#surgerydesc").val(surgery.surgerydesc);
+                $("#starttime").val(surgery.starttime);
+                $("#endtime").val(surgery.endtime);
 
-                $("#reportbtn").off("click").text("Update Feedback").attr("data-update", feedbackId);
+                $("#surgerybtn").off("click").text("Update Surgery").attr("data-update", surgeryId);
             }
         });
     });
 
-    $(document).on("click", "#reportbtn[data-update]", function (e) {
+    $(document).on("click", "#surgerybtn[data-update]", function (e) {
         e.preventDefault();
-        var feedbackId = $(this).attr("data-update");
+        var surgeryId = $(this).attr("data-update");
 
         var updatedData = {
             update: true,
-            id: feedbackId,
-            date: $("#date").val(),
-            time: $("#time").val(),
-            feedback: $("#feedback").val(),
+            id: surgeryId,
+            surgeryid: $("#surgeryid").val(),
+            surgerydate: $("#surgerydate").val(),
+            surgerydesc: $("#surgerydesc").val(),
+            starttime: $("#starttime").val(),
+            endtime: $("#endtime").val()
         };
 
         $.ajax({
-            url: "visitFeedbackBackend.php",
+            url: "surgeryBackend.php",
             type: "POST",
             data: updatedData,
             success: function () {
                 Swal.fire({
                     title: "Updated!",
-                    text: "Feedback has been updated.",
+                    text: "Surgery record has been updated.",
                     icon: "success",
                     confirmButtonColor: "rgb(0, 148, 255)",
                     confirmButtonText: "OK"
@@ -976,13 +821,11 @@ $(document).ready(function () {
                     location.reload();
                 });
 
-                $("#customerForm")[0].reset();
+                $("#surgeryForm")[0].reset();
             }
         });
     });
-
 });
-
 </script>
 
 </body>
