@@ -447,7 +447,7 @@ if (!isset($_SESSION['username'])) {
 </li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <li class="nav-item l" style="padding:0px;">
-    <a class="nav-link k" href="followups.php" style="color: white;">
+    <a class="nav-link k" href="patientcreation.php" style="color: white;">
         <i class="fas  fa-procedures" style="font-size:16px"></i>
         <span>Patient Creation</span>
     </a>
@@ -475,7 +475,7 @@ if (!isset($_SESSION['username'])) {
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Project Creation -->
 <li class="nav-item l">
-    <a class="nav-link k" href="projectcreation.php" style="color: black;">
+    <a class="nav-link k" href="nursecreation.php" style="color: black;">
         <i class="fas  fa-user-nurse" style="font-size:16px"></i>
         <span>Nurse Creation</span>
     </a>
@@ -483,7 +483,7 @@ if (!isset($_SESSION['username'])) {
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Daily Updates -->
 <li class="nav-item l">
-    <a class="nav-link k" href="dailyupdates.php" style="color: black;">
+    <a class="nav-link k" href="doctorcreation.php" style="color: black;">
         <i class="fas fa-user-md" style="font-size:16px"></i>
         <span>Doctor Creation</span>
     </a>
@@ -780,51 +780,48 @@ if (!isset($_SESSION['username'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                <?php 
+include 'dbconn.php'; // Include your database connection file
 
-                <?php
-include 'dbconn.php'; // Include your DB connection file
+// Count total doctors
+$totalDoctorsQuery = "SELECT COUNT(*) AS total FROM doctor";
+$totalDoctorsResult = $conn->query($totalDoctorsQuery);
+$totalDoctors = $totalDoctorsResult->fetch_assoc()['total'];
 
-// Count total projects
-$totalProjectsQuery = "SELECT COUNT(*) AS total FROM projectcreation";
-$totalProjectsResult = $conn->query($totalProjectsQuery);
-$totalProjects = $totalProjectsResult->fetch_assoc()['total'];
+// Count total nurses
+$totalNursesQuery = "SELECT COUNT(*) AS total FROM nurse";
+$totalNursesResult = $conn->query($totalNursesQuery);
+$totalNurses = $totalNursesResult->fetch_assoc()['total'];
 
-// Count ongoing projects (check if any company-projectTitle exists in dailyupdates)
-$ongoingProjectsQuery = "SELECT COUNT(DISTINCT CONCAT(companyName, '-', projectTitle)) AS ongoing FROM dailyupdates WHERE CONCAT(companyName, '-', projectTitle) IN (SELECT CONCAT(companyName, '-', projectTitle) FROM projectcreation)";
-$ongoingProjectsResult = $conn->query($ongoingProjectsQuery);
-$ongoingProjects = $ongoingProjectsResult->fetch_assoc()['ongoing'];
-
-// Calculate pending projects
-$pendingProjects = $totalProjects - $ongoingProjects;
-
-// Count total employees
-$totalEmployeesQuery = "SELECT COUNT(*) AS total FROM employeedetails";
-$totalEmployeesResult = $conn->query($totalEmployeesQuery);
-$totalEmployees = $totalEmployeesResult->fetch_assoc()['total'];
+// Count total patients
+$totalPatientsQuery = "SELECT COUNT(*) AS total FROM patient";
+$totalPatientsResult = $conn->query($totalPatientsQuery);
+$totalPatients = $totalPatientsResult->fetch_assoc()['total'];
 ?>
 
 <div class="square-box"> 
     <div class="stats-box">
         <i class="fas fa-user-md" style="font-size: 20px;"></i>
-        <h1 style="font-size: 20px;"><?php echo $totalProjects; ?></h1>
+        <h1 style="font-size: 20px;"><?php echo $totalDoctors; ?></h1>
         <small>No of Doctors</small>
     </div>
     <div class="stats-box">
         <i class="fas fa-user-nurse" style="font-size: 20px;"></i>
-        <h1 style="font-size: 20px;"><?php echo $pendingProjects; ?></h1>
+        <h1 style="font-size: 20px;"><?php echo $totalNurses; ?></h1>
         <small>No of Nurses</small>
     </div>
     <div class="stats-box">
         <i class="fas fa-procedures" style="font-size: 20px;"></i>
-        <h1 style="font-size: 20px;"><?php echo $ongoingProjects; ?></h1>
+        <h1 style="font-size: 20px;"><?php echo $totalPatients; ?></h1>
         <small>No of Patients</small>
     </div>
     <div class="stats-box">
         <i class="fas fa-chart-line" style="font-size: 20px;"></i>
-        <h1 style="font-size: 20px;"><?php echo $totalEmployees; ?></h1>
+        <h1 style="font-size: 20px;">99.99%</h1>
         <small>Success Rate</small>
     </div>
-</div>
+</div>  
+
 
 
 <br>
