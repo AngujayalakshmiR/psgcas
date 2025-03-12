@@ -1,23 +1,21 @@
-<?php
-session_start();
+<?php session_start();
 
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
-include 'dbconn.php'; // Ensure this file has a valid DB connection ?>
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" href="img/ktglogo.jpg">
-    <title>Task Manager</title>
+    <title>Healstro</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -277,11 +275,6 @@ include 'dbconn.php'; // Ensure this file has a valid DB connection ?>
   margin-top: 5px;
 }
 
-
-
-
-
-
 * {
   margin: 0;
   padding: 0;
@@ -438,8 +431,8 @@ include 'dbconn.php'; // Ensure this file has a valid DB connection ?>
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: white;">
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-    <div class="sidebar-brand-icon" style='font-size:19px'>KTG</div>
-    <div class="sidebar-brand-text mx-2" style='font-size:19px'>DASHBOARD</div>
+    <div class="sidebar-brand-icon" style='font-size:15px'>Healstro</div>
+    <div class="sidebar-brand-text mx-2" style='font-size:15px'>DASHBOARD</div>
 </a>
 <hr class="sidebar-divider my-0">
 
@@ -455,14 +448,14 @@ include 'dbconn.php'; // Ensure this file has a valid DB connection ?>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <li class="nav-item l" style="padding:0px;">
     <a class="nav-link k" href="followups.php" style="color: white;">
-        <i class="fas fa-fw fa-comment-dots" style="font-size:16px"></i>
-        <span>FollowUps</span>
+        <i class="fas  fa-procedures" style="font-size:16px"></i>
+        <span>Patient Creation</span>
     </a>
 </li>
 <!-- Divider -->
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Master -->
-<li class="nav-item l master">
+<!-- <li class="nav-item l master">
     <a class="nav-link k collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo" style="color: white;">
         <i class="fas fa-fw fa-clipboard-list" style="font-size:16px"></i>
@@ -477,32 +470,32 @@ include 'dbconn.php'; // Ensure this file has a valid DB connection ?>
             <a class="collapse-item" href="followuptype.php" style="color: black;">FollowUp Type</a>
         </div>
     </div>
-</li> 
+</li>  -->
 <!-- Divider -->
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Project Creation -->
 <li class="nav-item l">
     <a class="nav-link k" href="projectcreation.php" style="color: black;">
-        <i class="fas fa-fw fa-folder" style="font-size:16px"></i>
-        <span>Project Creation</span>
+        <i class="fas  fa-user-nurse" style="font-size:16px"></i>
+        <span>Nurse Creation</span>
     </a>
 </li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Daily Updates -->
 <li class="nav-item l">
     <a class="nav-link k" href="dailyupdates.php" style="color: black;">
-        <i class="fas fa-fw fa-table" style="font-size:16px"></i>
-        <span>Daily Update</span>
+        <i class="fas fa-user-md" style="font-size:16px"></i>
+        <span>Doctor Creation</span>
     </a>
 </li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Work Reports -->
-<li class="nav-item l">
+<!-- <li class="nav-item l">
     <a class="nav-link k" href="reports.php" style="color: black;">
         <i class="fas fa-fw fa-chart-area" style="font-size:16px"></i>
         <span>Work Reports</span>
     </a>
-</li><br>
+</li><br> -->
 <!-- Divider -->
 <div class="sidebar-divider d-none d-md-block"></div>
 <!-- Sidebar Toggler -->
@@ -510,7 +503,6 @@ include 'dbconn.php'; // Ensure this file has a valid DB connection ?>
     <button class="rounded-circle side border-0" id="sidebarToggle"></button>
 </div>
 </ul>
-
 
 <style>
    
@@ -813,24 +805,24 @@ $totalEmployees = $totalEmployeesResult->fetch_assoc()['total'];
 
 <div class="square-box"> 
     <div class="stats-box">
-        <i class="fas fa-file" style="font-size: 20px;"></i>
+        <i class="fas fa-user-md" style="font-size: 20px;"></i>
         <h1 style="font-size: 20px;"><?php echo $totalProjects; ?></h1>
-        <small>Total Projects</small>
+        <small>No of Doctors</small>
     </div>
     <div class="stats-box">
-        <i class="fas fa-exclamation" style="font-size: 20px;"></i>
+        <i class="fas fa-user-nurse" style="font-size: 20px;"></i>
         <h1 style="font-size: 20px;"><?php echo $pendingProjects; ?></h1>
-        <small>Pending Projects</small>
+        <small>No of Nurses</small>
     </div>
     <div class="stats-box">
-        <i class="fas fa-check" style="font-size: 20px;"></i>
+        <i class="fas fa-procedures" style="font-size: 20px;"></i>
         <h1 style="font-size: 20px;"><?php echo $ongoingProjects; ?></h1>
-        <small>Ongoing Projects</small>
+        <small>No of Patients</small>
     </div>
     <div class="stats-box">
-        <i class="fas fa-bell" style="font-size: 20px;"></i>
+        <i class="fas fa-chart-line" style="font-size: 20px;"></i>
         <h1 style="font-size: 20px;"><?php echo $totalEmployees; ?></h1>
-        <small>Employee Count</small>
+        <small>Success Rate</small>
     </div>
 </div>
 
@@ -838,75 +830,7 @@ $totalEmployees = $totalEmployeesResult->fetch_assoc()['total'];
 <br>
 
 <!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <p class="m-0" style="font-size: 16px; color:rgb(23, 25, 28); font-weight: 500;">
-            <b>Daily Updates</b> 
-            <span class="header-counter">0</span>  <!-- Counter will be updated dynamically -->
-        </p>
-        <div> 
-            <input type="date" id="dateFilter" class="form-control d-inline" style="width: auto;">
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table text-center" id="dataTable" width="100%">
-                <thead>
-                    <tr>
-                        <th>S.no</th>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Company-Title</th>
-                        <th>Type</th>
-                        <th>Total Days</th>
-                        <th>Description</th>
-                        <th>Total Hrs</th>
-                        <th>Actual Hrs</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body">
-                <?php
-$c = 1;
-$sql = "SELECT * FROM dailyupdates ORDER BY date DESC";
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $actualHrs = trim($row['actualHrs']);
-        $status = ($actualHrs === '-' || empty($actualHrs)) 
-            ? '<td><i class="fas fa-hourglass-half status-icon in-progress" style="font-size:12px;color:rgb(0, 148, 255);"></i>&nbsp;&nbsp;Inprogress</td>' 
-            : '<td><i class="fas fa-check-circle status-icon completed" style="font-size:12px;color:rgb(0, 148, 255);"></i>&nbsp;&nbsp;Completed</td>';
-
-        // Convert date format to match input field
-        $formattedDate = date("d-m-Y", strtotime($row['date']));
-
-        echo "<tr data-date='$formattedDate'>
-            <td class='sno'>{$c}</td> 
-            <td class='name'>{$row['name']}</td>
-            <td class='date'>$formattedDate</td>
-            <td>{$row['companyName']} - {$row['projectTitle']}</td>
-            <td>{$row['projectType']}</td>
-            <td>{$row['totalDays']}</td>
-            <td>{$row['taskDetails']}</td>
-            <td>{$row['totalHrs']}</td>
-            <td>{$row['actualHrs']}</td>
-            $status
-        </tr>";
-
-        $c++;
-    }
-} else {
-    echo "<tr><td colspan='10'>No records found</td></tr>";
-}
-?>
-
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
             </div>
             <!-- End of Main Content -->
 
