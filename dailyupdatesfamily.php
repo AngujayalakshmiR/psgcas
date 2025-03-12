@@ -1,10 +1,4 @@
-<?php
-session_start();
 
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit();
-}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -643,12 +637,12 @@ if (!isset($_SESSION['username'])) {
       <!-- Navigation Tabs -->
       <ul class="nav nav-pills custom-nav" id="reportTabs">
     <li class="nav-item">
-        <a class="nav-link active" id="employeeTab" href="#" onclick="setActiveTab('employee')">
+        <a class="nav-link active" id="employeeTab"  onclick="setActiveTab('employee')">
              Meals
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="projectTab" href="#" onclick="setActiveTab('project')">
+        <a class="nav-link" id="projectTab"  onclick="setActiveTab('project')">
             Medication
         </a>
     </li>
@@ -805,8 +799,7 @@ if (!isset($_SESSION['username'])) {
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        
-                    <table class="table table-bordered text-center" style="font-size: 14px;" id="projectTable" width="100%" cellspacing="0"> 
+                    <table class="table table-bordered text-center" style="font-size: 14px;" id="projectTable" width="100%" cellspacing="0">  
     <thead>
         <tr class="thead">
             <th>S.no</th>
@@ -825,21 +818,31 @@ if (!isset($_SESSION['username'])) {
         $sno = 1;
 
         while ($row = mysqli_fetch_assoc($result)) {
+            $status = $row['status'];
             echo "<tr id='row_{$row['ID']}'>
                     <td>{$sno}</td>
                     <td>{$row['datetime']}</td>
                     <td>{$row['description']}</td>
                     <td><img src='{$row['proof']}' width='50' height='50'></td>
-                    <td>
-                        <i class='fas fa-check-circle text-success action-icon' onclick='updateStatus({$row['ID']}, \"Taken\")' style='cursor: pointer; font-size: 18px;'></i>
-                        <i class='fas fa-times-circle text-danger action-icon' onclick='updateStatus({$row['ID']}, \"Missed\")' style='cursor: pointer; font-size: 18px; margin-left: 10px;'></i>
-                    </td>
-                </tr>";
+                    <td id='action_{$row['ID']}'>";
+
+            if ($status == "Taken" || $status == "Missed") {
+                echo "<span class='status-text'>{$status}</span>"; // Display status if already set
+            } else {
+                echo "<i class='fas fa-check-circle text-success action-icon' 
+                        onclick='updateStatus({$row['ID']}, \"Taken\")' 
+                        style='cursor: pointer; font-size: 18px;'></i>
+                      <i class='fas fa-times-circle text-danger action-icon' 
+                        onclick='updateStatus({$row['ID']}, \"Missed\")' 
+                        style='cursor: pointer; font-size: 18px; margin-left: 10px;'></i>";
+            }
+            echo "</td></tr>";
             $sno++;
         }
         ?>
     </tbody>
 </table>
+
 
                     </div>
                 </div>
@@ -1527,6 +1530,12 @@ $(document).ready(function () {
                             text: xhr.responseText,
                             icon: "success"
                         });
+
+                        // Replace icons with the status text
+                        let actionCell = document.getElementById("action_" + id);
+                        if (actionCell) {
+                            actionCell.innerHTML = `<span class='status-text'>${status}</span>`;
+                        }
                     }
                 };
                 xhr.send("id=" + id + "&status=" + status);
@@ -1534,6 +1543,16 @@ $(document).ready(function () {
         });
     }
 </script>
+
+
+<style>
+    /* Style to disable icons */
+    .disabled-icon {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+</style>
+
 
 </body>
 
