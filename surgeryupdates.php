@@ -496,42 +496,30 @@
         <div class="row">
             <div class="col-md-12">
                 <form id="surgeryForm" class="row g-3 mt-3">
-                    
-                    <div class="col-md-4 pb-1">
-                        <input type="text" class="form-control mb-2" id="surgeryid" name="surgeryid" placeholder="Enter Surgery ID" required>
+                    <div class="col-md-3 pb-1">
+                        <input type="text" class="form-control mb-2" id="surgerydate" placeholder="Enter Surgery Date" required>
                     </div>
-
-                    <div class="col-md-4 pb-1">
-                        <input type="text" class="form-control mb-2" id="surgerydate" name="surgerydate" placeholder="Enter Surgery Date" required>
+                    <div class="col-md-3 pb-1">
+                        <input type="text" class="form-control mb-2" id="surgerydesc" placeholder="Enter Surgery Description" required>
                     </div>
-
-                    <div class="col-md-4 pb-1">
-                        <input type="text" class="form-control mb-2" id="surgerydesc" name="surgerydesc" placeholder="Enter Surgery Description" required>
+                    <div class="col-md-3 pb-1">
+                        <input type="text" class="form-control mb-2" id="starttime" placeholder="Start Time" required>
                     </div>
-
-                    <div class="col-md-4 pb-1">
-                        <input type="text" class="form-control mb-2" id="starttime" name="starttime" placeholder="Enter Surgery Start Time" required>
+                    <div class="col-md-3 pb-1">
+                        <input type="text" class="form-control mb-2" id="endtime" placeholder="End Time" required>
                     </div>
-
-                    <div class="col-md-4 pb-1">
-                        <input type="text" class="form-control mb-2" id="endtime" name="endtime" placeholder="Enter End Time" required>
-                    </div>
-
                 </form>
             </div>
         </div>
     </div>
-
     <div class="column">
         <div class="pb-2 d-flex justify-content-sm-end justify-content-center align-items-center">
-            <button type="submit" class="btn" id="surgerybtn"
-                style="background: rgb(0, 148, 255); border-radius: 25px; color: white;">
+            <button type="submit" class="btn" id="surgerybtn" style="background: rgb(0, 148, 255); border-radius: 25px; color: white;">
                 <i class="fas fa-plus"></i>&nbsp; Add Surgery
             </button>
         </div>
     </div>
 </div>
-
 
 <script>
     $(document).ready(function () {
@@ -701,7 +689,7 @@ countryDropdown.addEventListener("change", function() {
     text-overflow: ellipsis;
     color: rgb(23, 25, 28);
     font-size: 16px;
-    font-weight: 500;"><b>Customer Details</b> 
+    font-weight: 500;"><b>Surgery Details</b> 
         <span class="header-counter">0</span>  <!-- Counter next to heading -->
 </p>
        
@@ -712,15 +700,39 @@ countryDropdown.addEventListener("change", function() {
     <thead>
         <tr class="thead">
             <th>S.no</th>
-            <th>Date</th>
+            <th>Surgery Date</th>
             <th>Description</th>
             <th>Start Time</th>
             <th>End Time</th>
             <th>Action</th>
         </tr>
     </thead>
-    <tbody id="surgeryTableBody"></tbody>
+    <tbody id="surgeryTableBody">
+        <?php
+        include("dbconn.php"); // Ensure database connection
+
+        $query = "SELECT * FROM surgery ORDER BY ID DESC";
+        $result = mysqli_query($conn, $query);
+        $sno = 1;
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>
+                    <td>{$row['ID']}</td>
+                    <td>{$row['surgerydate']}</td>
+                    <td>{$row['surgerydesc']}</td>
+                    <td>{$row['starttime']}</td>
+                    <td>{$row['endtime']}</td>
+                    <td class='action-buttons'>
+                        <button class='btn-action btn-edit' data-id='{$row['ID']}'><i class='fas fa-edit'></i></button>
+                        <button class='btn-action btn-delete' data-id='{$row['ID']}'><i class='fas fa-trash-alt' style='color: rgb(238, 153, 129);'></i></button>
+                    </td>
+                </tr>";
+            $sno++;
+        }
+        ?>
+    </tbody>
 </table>
+
 
 
     </div>
@@ -812,11 +824,17 @@ countryDropdown.addEventListener("change", function() {
     });
 </script>
 <script>
-$(document).ready(function () {
-    loadSurgeryData();
+$(document).ready(function () { 
+    loadSurgeries(); // Fetch data when the page loads
 
-    $("#surgeryForm").submit(function (e) { 
+    $("#surgerybtn").click(function (e) { 
         e.preventDefault();
+
+        // Validate form before sending AJAX request
+        if (!$("#surgeryForm")[0].checkValidity()) {
+            $("#surgeryForm")[0].reportValidity();
+            return;
+        }
 
         var surgeryData = {
             surgeryid: $("#surgeryid").val(),
@@ -830,30 +848,47 @@ $(document).ready(function () {
             url: "surgeryBackend.php",
             type: "POST",
             data: surgeryData,
-            success: function () {
-                Swal.fire("Success!", "Surgery record added!", "success").then(() => {
-                    location.reload();
+            success: function (response) {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Surgery record has been added successfully.",
+                    icon: "success",
+                    confirmButtonColor: "rgb(0, 148, 255)",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    location.reload(); // ✅ Reload after confirmation
                 });
+
                 $("#surgeryForm")[0].reset();
             }
         });
     });
-});
 
-
-    function loadSurgeryData() { 
+    function loadSurgeries() { 
         $.ajax({
             url: "surgeryBackend.php",
             type: "GET",
             dataType: "json",
             success: function (data) {
                 if ($.fn.DataTable.isDataTable("#surgeryTable")) {
-                    $("#surgeryTable").DataTable().destroy();
+                    $("#surgeryTable").DataTable().destroy(); 
                 }
 
-                $("#surgeryTableBody").html(data.tableData || `<tr><td colspan="6" class="text-center">No records found</td></tr>`);
-                $("#surgeryTable").DataTable();
+                if (data.count > 0) {
+                    $("#surgeryTableBody").html(data.tableData);
+                } else {
+                    $("#surgeryTableBody").html(`
+                        <tr>
+                            <td colspan="7" class="text-center">No surgeries found</td>
+                        </tr>
+                    `);
+                }
+
+                $("#surgeryTable").DataTable(); 
                 $(".header-counter").text(data.count);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching surgeries:", error);
             }
         });
     }
@@ -866,10 +901,10 @@ $(document).ready(function () {
             text: "This action cannot be undone!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "rgb(0, 148, 255)",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, Delete",
-            cancelButtonText: "Cancel"
+            cancelButtonText: "No, Cancel"
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -877,7 +912,13 @@ $(document).ready(function () {
                     type: "POST",
                     data: { delete: true, id: surgeryId },
                     success: function () {
-                        Swal.fire("Deleted!", "Surgery record removed.", "success").then(() => {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Surgery record has been removed.",
+                            icon: "success",
+                            confirmButtonColor: "rgb(0, 148, 255)",
+                            confirmButtonText: "OK"
+                        }).then(() => {
                             location.reload();
                         });
                     }
@@ -895,23 +936,25 @@ $(document).ready(function () {
             data: { edit: true, id: surgeryId },
             dataType: "json",
             success: function (surgery) {
+                $("#surgeryid").val(surgery.surgeryid);
                 $("#surgerydate").val(surgery.surgerydate);
                 $("#surgerydesc").val(surgery.surgerydesc);
                 $("#starttime").val(surgery.starttime);
                 $("#endtime").val(surgery.endtime);
 
-                $("#subimtbtn").off("click").text("Update Surgery").attr("data-update", surgeryId);
+                $("#surgerybtn").off("click").text("Update Surgery").attr("data-update", surgeryId);
             }
         });
     });
 
-    $(document).on("click", "#subimtbtn[data-update]", function (e) {
+    $(document).on("click", "#surgerybtn[data-update]", function (e) {
         e.preventDefault();
         var surgeryId = $(this).attr("data-update");
 
         var updatedData = {
             update: true,
             id: surgeryId,
+            surgeryid: $("#surgeryid").val(),
             surgerydate: $("#surgerydate").val(),
             surgerydesc: $("#surgerydesc").val(),
             starttime: $("#starttime").val(),
@@ -923,15 +966,21 @@ $(document).ready(function () {
             type: "POST",
             data: updatedData,
             success: function () {
-                Swal.fire("Updated!", "Surgery record updated.", "success").then(() => {
+                Swal.fire({
+                    title: "Updated!",
+                    text: "Surgery record has been updated.",
+                    icon: "success",
+                    confirmButtonColor: "rgb(0, 148, 255)",
+                    confirmButtonText: "OK"
+                }).then(() => {
                     location.reload();
                 });
+
                 $("#surgeryForm")[0].reset();
             }
         });
     });
 });
-
 </script>
 
 </body>
