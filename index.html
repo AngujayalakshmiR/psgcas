@@ -1,0 +1,436 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+include 'dbconn.php'; // Ensure this file has a valid DB connection ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="img/ktglogo.jpg">
+    <title>Task Manager</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+        <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- jQuery (Must be before DataTables) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables CSS -->
+<link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<style>
+    thead{
+        color:black;
+    }
+        #dataTable th:nth-child(1), #dataTable td:nth-child(1) { width: 2%; }  /* S.no */
+#dataTable th:nth-child(2), #dataTable td:nth-child(2) { width: 8%; } /* Name */
+#dataTable th:nth-child(3), #dataTable td:nth-child(3) { width: 13%; } /* Date */
+#dataTable th:nth-child(4), #dataTable td:nth-child(4) { width: 14%; } /* Company */
+#dataTable th:nth-child(5), #dataTable td:nth-child(5) { width: 12%; } /* Project Title */
+#dataTable th:nth-child(6), #dataTable td:nth-child(6) { width: 12%; } /* Total Days */
+#dataTable th:nth-child(7), #dataTable td:nth-child(7) { width: 15%; } /* Description */
+#dataTable th:nth-child(8), #dataTable td:nth-child(8) { width: 12%; } /* Total Time */
+#dataTable th:nth-child(9), #dataTable td:nth-child(9) { width: 13%; }
+#dataTable th:nth-child(10), #dataTable td:nth-child(10) { width: 10%; }
+
+ /* Reduce table font size */
+ #dataTable {
+        font-size: 14px; /* Adjust size as needed */
+    }
+      thead  {
+            color: black;
+        }
+
+</style>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+   
+
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: white;">
+<!-- Sidebar - Brand -->
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+    <div class="sidebar-brand-icon" style='font-size:19px'>KTG</div>
+    <div class="sidebar-brand-text mx-2" style='font-size:19px'>DASHBOARD</div>
+</a>
+<hr class="sidebar-divider my-0">
+
+<!-- Divider -->
+<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
+<!-- Nav Item - Dashboard -->
+<li class="nav-item l active">
+    <a class="nav-link k" href="index.php" style="color: white;">
+        <i class="fas fa-fw fa-tachometer-alt" style="font-size:16px"></i>
+        <span>Dashboard</span>
+    </a>
+</li>
+<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
+<li class="nav-item l" style="padding:0px;">
+    <a class="nav-link k" href="followups.php" style="color: white;">
+        <i class="fas fa-fw fa-comment-dots" style="font-size:16px"></i>
+        <span>FollowUps</span>
+    </a>
+</li>
+<!-- Divider -->
+<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
+<!-- Nav Item - Master -->
+<li class="nav-item l master">
+    <a class="nav-link k collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        aria-expanded="true" aria-controls="collapseTwo" style="color: white;">
+        <i class="fas fa-fw fa-clipboard-list" style="font-size:16px"></i>
+        <span>Master</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="z-index: 1000;">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item " href="customer.php" style="color: black;">Customer</a>
+            <a class="collapse-item " href="employee.php" style="color: black;">Employee</a>
+            <a class="collapse-item" href="designation.php" style="color: black;">Designation</a>
+            <a class="collapse-item" href="projecttype.php" style="color: black;">Project Type</a>
+            <a class="collapse-item" href="followuptype.php" style="color: black;">FollowUp Type</a>
+        </div>
+    </div>
+</li> 
+<!-- Divider -->
+<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
+<!-- Nav Item - Project Creation -->
+<li class="nav-item l">
+    <a class="nav-link k" href="projectcreation.php" style="color: black;">
+        <i class="fas fa-fw fa-folder" style="font-size:16px"></i>
+        <span>Project Creation</span>
+    </a>
+</li>
+<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
+<!-- Nav Item - Daily Updates -->
+<li class="nav-item l">
+    <a class="nav-link k" href="dailyupdates.php" style="color: black;">
+        <i class="fas fa-fw fa-table" style="font-size:16px"></i>
+        <span>Daily Update</span>
+    </a>
+</li>
+<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
+<!-- Nav Item - Work Reports -->
+<li class="nav-item l">
+    <a class="nav-link k" href="reports.php" style="color: black;">
+        <i class="fas fa-fw fa-chart-area" style="font-size:16px"></i>
+        <span>Work Reports</span>
+    </a>
+</li><br>
+<!-- Divider -->
+<div class="sidebar-divider d-none d-md-block"></div>
+<!-- Sidebar Toggler -->
+<div class="text-center d-none d-md-inline">
+    <button class="rounded-circle side border-0" id="sidebarToggle"></button>
+</div>
+</ul>
+
+
+<style>
+#dataTable tbody td i {
+    color: rgb(0, 148, 255);
+}
+.page-item.active .page-link {
+    background: rgb(0, 148, 255);
+}
+</style>
+<style>
+    #dataTable th:nth-child(3), 
+    #dataTable td:nth-child(3) {
+    display: none;
+}
+</style>
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style=" background:white;">
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                <div class="mr-auto d-flex align-items-center pl-3 py-2">
+
+    <h4 class="text-dark font-weight-bold mr-4" style="color: rgb(15,29,64); font-size: medium; margin-top: 5px;">
+        Dashboard
+    </h4></div>
+                    <ul class="navbar-nav ml-auto">
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="img-profile rounded-circle"
+                                    src="img/p.png" style="width: 2rem;height: 2rem;">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                
+                                
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                <?php
+include 'dbconn.php'; // Include your DB connection file
+
+// Count total projects
+$totalProjectsQuery = "SELECT COUNT(*) AS total FROM projectcreation";
+$totalProjectsResult = $conn->query($totalProjectsQuery);
+$totalProjects = $totalProjectsResult->fetch_assoc()['total'];
+
+// Count ongoing projects (check if any company-projectTitle exists in dailyupdates)
+$ongoingProjectsQuery = "SELECT COUNT(DISTINCT CONCAT(companyName, '-', projectTitle)) AS ongoing FROM dailyupdates WHERE CONCAT(companyName, '-', projectTitle) IN (SELECT CONCAT(companyName, '-', projectTitle) FROM projectcreation)";
+$ongoingProjectsResult = $conn->query($ongoingProjectsQuery);
+$ongoingProjects = $ongoingProjectsResult->fetch_assoc()['ongoing'];
+
+// Calculate pending projects
+$pendingProjects = $totalProjects - $ongoingProjects;
+
+// Count total employees
+$totalEmployeesQuery = "SELECT COUNT(*) AS total FROM employeedetails";
+$totalEmployeesResult = $conn->query($totalEmployeesQuery);
+$totalEmployees = $totalEmployeesResult->fetch_assoc()['total'];
+?>
+
+<div class="square-box"> 
+    <div class="stats-box">
+        <i class="fas fa-file" style="font-size: 20px;"></i>
+        <h1 style="font-size: 20px;"><?php echo $totalProjects; ?></h1>
+        <small>Total Projects</small>
+    </div>
+    <div class="stats-box">
+        <i class="fas fa-exclamation" style="font-size: 20px;"></i>
+        <h1 style="font-size: 20px;"><?php echo $pendingProjects; ?></h1>
+        <small>Pending Projects</small>
+    </div>
+    <div class="stats-box">
+        <i class="fas fa-check" style="font-size: 20px;"></i>
+        <h1 style="font-size: 20px;"><?php echo $ongoingProjects; ?></h1>
+        <small>Ongoing Projects</small>
+    </div>
+    <div class="stats-box">
+        <i class="fas fa-bell" style="font-size: 20px;"></i>
+        <h1 style="font-size: 20px;"><?php echo $totalEmployees; ?></h1>
+        <small>Employee Count</small>
+    </div>
+</div>
+
+
+<br>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <p class="m-0" style="font-size: 16px; color:rgb(23, 25, 28); font-weight: 500;">
+            <b>Daily Updates</b> 
+            <span class="header-counter">0</span>  <!-- Counter will be updated dynamically -->
+        </p>
+        <div> 
+            <input type="date" id="dateFilter" class="form-control d-inline" style="width: auto;">
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table text-center" id="dataTable" width="100%">
+                <thead>
+                    <tr>
+                        <th>S.no</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Company-Title</th>
+                        <th>Type</th>
+                        <th>Total Days</th>
+                        <th>Description</th>
+                        <th>Total Hrs</th>
+                        <th>Actual Hrs</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                <?php
+$c = 1;
+$sql = "SELECT * FROM dailyupdates ORDER BY date DESC";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $actualHrs = trim($row['actualHrs']);
+        $status = ($actualHrs === '-' || empty($actualHrs)) 
+            ? '<td><i class="fas fa-hourglass-half status-icon in-progress" style="font-size:12px;color:rgb(0, 148, 255);"></i>&nbsp;&nbsp;Inprogress</td>' 
+            : '<td><i class="fas fa-check-circle status-icon completed" style="font-size:12px;color:rgb(0, 148, 255);"></i>&nbsp;&nbsp;Completed</td>';
+
+        // Convert date format to match input field
+        $formattedDate = date("d-m-Y", strtotime($row['date']));
+
+        echo "<tr data-date='$formattedDate'>
+            <td class='sno'>{$c}</td> 
+            <td class='name'>{$row['name']}</td>
+            <td class='date'>$formattedDate</td>
+            <td>{$row['companyName']} - {$row['projectTitle']}</td>
+            <td>{$row['projectType']}</td>
+            <td>{$row['totalDays']}</td>
+            <td>{$row['taskDetails']}</td>
+            <td>{$row['totalHrs']}</td>
+            <td>{$row['actualHrs']}</td>
+            $status
+        </tr>";
+
+        $c++;
+    }
+} else {
+    echo "<tr><td colspan='10'>No records found</td></tr>";
+}
+?>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+            </div>
+            <!-- End of Main Content -->
+
+            
+            <!-- End of Footer -->
+
+        </div>
+    </div>
+
+
+<!-- jQuery (Required for DataTables) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Initialize DataTable -->
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable();
+    });
+</script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    
+
+    <script>
+ document.addEventListener("DOMContentLoaded", function () {
+    let today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+    let dateInput = document.getElementById("dateFilter");
+
+    dateInput.value = today; // Set default to today
+    filterByDate(); // Automatically filter on page load
+
+    // Apply filter immediately when date is changed
+    dateInput.addEventListener("change", filterByDate);
+});
+
+function filterByDate() {
+    let selectedDate = document.getElementById("dateFilter").value;
+    if (!selectedDate) return;
+
+    let formattedSelectedDate = selectedDate.split("-").reverse().join("-"); // Convert to DD-MM-YYYY
+    let table = document.getElementById("dataTable");
+    let rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+    for (let i = 0; i < rows.length; i++) {
+        let dateCell = rows[i].getElementsByTagName("td")[2];
+        if (dateCell) {
+            let rowDate = dateCell.textContent.trim();
+            rows[i].style.display = (rowDate === formattedSelectedDate) ? "" : "none";
+        }
+    }
+}
+</script>
+<script>
+setTimeout(function () {
+    document.querySelectorAll("tbody tr").forEach(row => {
+        console.log(`Row has ${row.cells.length} cells`);
+        
+        if (row.cells.length < 13) {
+            console.warn("Skipping row: Some cells are missing.");
+            return;
+        }
+        
+        let taskTypeCell = row.cells[7];
+        let moduleStatusCell = row.cells[11];
+        let projectStatusCell = row.cells[12];
+        
+        let taskType = taskTypeCell.innerText.trim();
+        let moduleStatus = moduleStatusCell.innerText.trim();
+        
+        console.log(`Task Type: ${taskType}, Module Status: ${moduleStatus}`);
+        
+        if (moduleStatus.includes("Completed")&&taskType.includes("Testing") ) {
+            projectStatusCell.innerHTML = `
+                <button class="btn btn-success btn-sm" onclick="markCompleted(this)">Mark as Completed</button>
+            `;
+        } else {
+            projectStatusCell.innerHTML = `
+                <button class="btn btn-warning btn-sm">Ongoing</button>
+            `;
+        }
+    });
+}, 2000);
+
+function markCompleted(button) {
+    let row = button.closest("tr");
+    let projectStatusCell = row.cells[12]; // Adjusted to match correct index
+    
+    projectStatusCell.innerHTML = `
+        <span class="text-success"><i class="fas fa-check-circle"></i> Completed</span>
+    `;
+}
+</script>
+
+</body>
+
+</html>

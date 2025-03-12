@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>BigMoon</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/bigmoon_logo_circle.png" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+      <!-- Bootstrap 5 CSS -->
+  <style>
+    /* Card Styles */
+    .card {
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .card img {
+      border-radius: 10px 0 0 10px;
+    }
+    .card-body h5 {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .btn-read-more {
+      background-color:#5dc1e6;
+      color: #fff;
+      transition: background-color 0.3s ease-in-out;
+    }
+    .btn-read-more:hover {
+      background-color:#1dcce0 ;
+      color: white;
+    }
+    /* Scroll Animation */
+    @keyframes scrollDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .card {
+      animation: scrollDown 0.8s ease-in-out;
+    }
+  </style>
+<style>
+    .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+.container-xxl,
+.container-fluid {
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+}
+.container, .container-fluid, .container-xxl {
+    width: 100%;
+}
+
+
+.container-xxl {
+    max-width: none !important;
+}
+@media (max-width: 576px) {
+    .top-banner {
+        display: none;
+    }
+}
+.top-banner {
+    background-color: #1dcce0 ; /* Bootstrap Primary Blue */
+    color: #fff; /* White text */
+    text-align: center;
+    padding: 10px 0; /* Vertical padding */
+    width: 100%; /* Full width */
+    font-size: 16px; /* Adjust text size */
+    font-weight: bold; /* Bold text */
+}
+.shopify-section {
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 20px;
+}
+
+.scroll-container {
+  overflow-x: auto; /* Enables horizontal scrolling */
+  overflow-y: hidden; /* Hides vertical scrolling */
+  white-space: nowrap; /* Ensures all blocks are in one line */
+  scrollbar-color: #1dcce0  transparent; /* Custom scrollbar color */
+  scrollbar-width: thin; /* Thin scrollbar for modern browsers */
+  margin-bottom: 10px; /* Adds some space below the scroll container */
+  padding-bottom: 10px; /* Adds gap between images and the scrollbar */
+}
+
+
+/* Webkit Scrollbar Styling */
+.scroll-container::-webkit-scrollbar {
+  height: 6px; /* Thin scrollbar height */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #1dcce0 ; /* Scrollbar thumb color */
+  border-radius: 3px; /* Rounded scrollbar */
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent; /* Transparent track */
+}
+
+.image-with-text-wrapper {
+  display: flex;
+  gap: 25px; /* Spacing between items */
+}
+
+.block {
+  flex: 0 0 auto; /* Prevent blocks from shrinking or growing */
+  width: 175px; /* Fixed width for images */
+  text-align: center;
+}
+
+.block img {
+  width: 100%;
+  height: 175px;
+  object-fit: cover;
+  border-radius: 5px; /* Optional: Rounded corners */
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 750px) {
+  .shopify-section {
+    padding: 10px;
+  }
+
+  .block {
+    width: 150px; /* Adjust image width for smaller screens */
+  }
+
+  .block img {
+    height: 150px; /* Adjust image height for smaller screens */
+  }
+}
+.dropdown-menu .dropdown-item:hover {
+    background-color: #1dcce0 ;
+    color: #fff; /* Optional: Changes the text color for better visibility */
+}
+
+/* Base styles for buttons */
+.btn-light {
+    border: 1px solid #1dcce0 ;
+    color: #1dcce0 ;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.btn-light:hover {
+    background: linear-gradient(45deg, #1dcce0 , #5dc1e6);
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Icon spacing on hover (optional, for emphasis) */
+.btn-light:hover i {
+    margin-right: 5px; /* Slightly increase icon spacing */
+}
+
+.owl-carousel-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover; /* Ensures consistent sizing */
+}
+/* Container for the entire product slider */
+.product-slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%; 
+    /* Ensure the slider takes up the full width of the parent container */
+}
+
+.slider-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: max-content; 
+    padding-right: 50px; /* Ensure the container stretches to fit the content */
+    padding-left: 80px;
+}
+
+.pp::placeholder{
+    color:#777;
+
+}
+
+.text-white-50{
+    text-decoration: none;
+}
+
+/* Section Title Styles */
+.section-title {
+    position: relative;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+/* Blue bar beneath the title */
+.blue-bar {
+    position: relative;
+    width: 220px;  /* Adjust width as needed */
+    height: 5px;
+    background-color: var(--primary);  /* Your blue color */
+    margin-top: 10px;  /* Space between title and bar */
+    overflow: hidden;
+    align-items: center;
+    margin-left: auto;   /* Center horizontally */
+    margin-right: auto;  /* Center horizontally */
+}
+
+/* Small white rectangle (moving box) */
+.moving-box {
+    position: absolute;
+    top: 0;
+    width: 18px;  /* Adjust the width of the moving box */
+    height: 5px;  /* Match the height of the blue bar */
+    background-color: white;  /* White color for the box */
+    animation: move-box 3s ease-in-out infinite;  /* Apply animation */
+}
+
+/* Keyframes for animating the white box */
+@keyframes move-box {
+    0% {
+        left: 0;  /* Start from the left */
+    }
+    50% {
+        left: 100%;  /* Move to the right */
+        transform: translateX(-100%);  /* Adjust for full movement */
+    }
+    100% {
+        left: 0;  /* Move back to the left */
+    }
+}
+
+/* Ensures the box-sizing applies to all elements */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.responsive-image {
+    width: 100%; /* Set width to 100% to make it responsive */
+    height: 600px; /* Fixed height of 600px */
+    object-fit: cover; /* Ensures the image covers the area without stretching */
+    max-width: 100%; /* Ensures image doesn't stretch beyond its natural size */
+    padding-top: 55px;
+    padding-bottom: 55px;
+}
+/* Basic Styles for the Product Section */
+.product-section {
+    padding: 15px;
+}
+
+.product-navs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-tabss {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-items {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-items.active {
+    background-color: #1dcce0 ;
+    color: white;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-color: #1dcce0 ;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid #ddd;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-title {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.product-description {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.add-to-cart {
+    background-color: #1dcce0 ;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #5dc1e6;
+}
+
+.add-to-cart .cart-icon {
+    margin-right: 10px;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For smaller screens like phones and tablets */
+@media (max-width: 768px) {
+    .product-navs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+    }
+
+    .product-card {
+        max-width: 100%;
+    }
+
+    .product-title {
+        font-size: 14px;
+    }
+
+    .product-description {
+        font-size: 12px;
+    }
+
+    .add-to-cart {
+        font-size: 12px;
+    }
+}
+
+/* For very small screens like mobile phones */
+@media (max-width: 576px) {
+    .product-navs {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .product-card {
+        max-width: 100%;
+    }
+
+    .product-title {
+        font-size: 12px;
+    }
+
+    .product-description {
+        font-size: 10px;
+    }
+
+    .add-to-cart {
+        font-size: 10px;
+    }
+}
+
+/* Optional: Styling for hidden product categories */
+.product-grid.hidden {
+    display: none;
+}
+.navbar{
+    z-index: 500;
+}
+.cart-modal {
+        position: fixed;
+        top: 5px;
+        right: 5px;
+        bottom: 5px;
+        width: 500px;
+        height: 100%;
+        background: #fff;
+        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+    }
+
+    .cart-modal-header {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f7f7f7;
+    }
+
+    .cart-modal-header h2 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .cart-modal-close {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .cart-modal-body {
+        padding: 20px;
+    }
+
+    .cart-empty {
+        text-align: center;
+    }
+
+    .cart-empty h4 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .cart-empty p {
+        margin-bottom: 10px;
+    }
+    .abtn-light {
+    border: 1px solid #0eb5d6;
+    color: white;
+    background: linear-gradient(45deg, #8dd1de, #5dc1e6);
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+/* Hover effect */
+.abtn-light:hover {
+    background: linear-gradient(45deg, #a0d2dc, #5dc1e6);
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Active state during click */
+.abtn-light:active {
+    border: 1px solid #0eb5d6;
+    color: white;
+    background: #0a8bbb;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+/* Permanent active state */
+.abtn-light.active {
+    background: #0a8bbb; /* Darker shaded background */
+    border: 1px solid #0eb5d6;
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Slight shadow */
+}
+</style>
+<style>
+    nav {
+  padding: 10px;
+  background-color: #333;
+  color: white;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #777;
+}
+
+/* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 100000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  width: 40%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  height: 30%;
+  overflow: hidden;
+  padding: 0px 0px;
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-body {
+  height: 70%;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+}
+
+input {
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  background-color: #3e23c8;
+  color: white;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  float: center;
+}
+
+button[type="submit"]:hover {
+  background-color: #5740cdc7;
+  color: white;
+}
+
+.close {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fffefe;
+}
+
+.close:hover,
+.close:focus {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .modal-content {
+    width: 70%;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
+
+  button {
+    padding: 8px 16px;
+  }
+
+  button[type="submit"] {
+    padding: 10px;
+  }
+
+  .close {
+    font-size: 25px;
+    right: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .modal-content {
+    width: 90%;
+  }
+
+  .modal-body {
+    padding: 10px;
+  }
+
+  button {
+    padding: 6px 12px;
+  }
+
+  button[type="submit"] {
+    padding: 8px;
+  }
+
+  .close {
+    font-size: 20px;
+    right: 10px;
+  }
+}
+</style>
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl  bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+        <div class="top-banner text-white text-center py-2">
+            Get FLAT ₹500 OFF on order above 2499 | Code: CHRISTMAS
+        </div>
+
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+            <a href="index.php" class="navbar-brand d-flex align-items-center">
+                <img src="img/bigmoon_logo_circle.png" alt="Logo" style="width: 40px; height: 40px; margin-right: 10px;">
+                <h1 class="m-0 " style="color: #1dcce0;">Bigmoon</h1>
+            </a>
+            
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav mx-auto">
+                  
+                    
+                  
+        <div class="nav-item d-flex align-items-center ">
+                    <a href="index.php" class="btn abtn-light  me-2 ">
+                        Home Furnishings
+                    </a>
+                </div>
+                <div class="nav-item d-flex align-items-center">
+                    <a href="babyessentials.php" class="btn abtn-light  me-2 ">
+                        Baby Essentials
+                    </a>
+                </div>
+                    <!-- Baby Products Dropdown 
+                    <div class="nav-item dropdown">
+                        <a href="babyessentials.html" class="nav-link ">
+                            Baby Essentials
+                        </a>
+                         
+                        <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+                            <a href="baby-blankets.html" class="dropdown-item">Baby Blankets</a>
+                            <a href="baby-pillows.html" class="dropdown-item">Baby Pillows</a>
+                            <a href="baby-towels.html" class="dropdown-item">Baby Towels</a>
+                        </div> -->
+                    
+                  
+                        <a href="ourstories.html" class="nav-link ">
+                            Our Story
+                        </a>
+                        
+                    <a href="blogs.html" class="nav-item nav-link active">Blogs</a>
+                   
+                        <a href="bigmoontestimonial.html" class="nav-link ">
+                            Testimonial
+                        </a>
+                    <a href="getintouch.html" class="nav-item nav-link">Get in Touch</a>
+                    <!--
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+                            <a href="facility.html" class="dropdown-item">School Facilities</a>
+                            <a href="team.html" class="dropdown-item">Popular Teachers</a>
+                            <a href="call-to-action.html" class="dropdown-item">Become A Teachers</a>
+                            <a href="appointment.html" class="dropdown-item">Make Appointment</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="404.html" class="dropdown-item">404 Error</a>
+                        </div>
+                    </div>-->
+        
+                    
+                </div>
+                <div class="d-flex align-items-center">
+                    <a  class="btn btn-light rounded-pill me-2" id="openModalBtn">
+                        <i class="fa fa-history me-1"></i> Order History
+                    </a>
+                    
+                </div>    
+            </div>
+        </nav>
+       
+<!-- Carousel Start -->
+<div class="container-xxl container-fluid p-0 mb-5">
+    <div class="owl-carousel header-carousel position-relative">
+        <!-- First Slide -->
+        <div class="owl-carousel-item">
+            <a href="#">
+                <img class="img-fluid"  src="img/c1.webp" alt="Image 1">
+            </a>
+        </div>
+       
+    </div>
+</div>
+
+<!-- Carousel End -->
+
+
+        <div class="container-fluid wow fadeInUp" data-wow-delay="0.1s" style="margin-bottom: 0px;">
+            <!-- News & Events Section Title -->
+            <div class="section-title text-center position-relative pb-2 mb-3 mx-auto" style="max-width: 600px; height:auto;">
+                <h5 class="fw-bold  text-uppercase" style="color: #1dcce0 ;">Blogs</h5>    
+                <!-- Blue bar container -->
+                <div class="blue-bar">
+                    <div class="moving-box"></div>  <!-- Small white rectangle -->
+                </div>
+            </div>				
+        </div>
+        
+        <section>
+            
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              <!-- Card 1 -->
+              <div class="col wow fadeInUp">
+                <div class="card h-100 d-flex flex-row">
+                  <img src="https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/28283586/2024/3/15/7534f38b-f241-470d-adb7-5fec216b4a651710444439326BlanketsQuiltsandDohars1.jpg" class="img-fluid w-50" alt="Card Image">
+                  <div class="card-body">
+                    <h5 class="card-title">Asthetic looks of Bigmoon Bed Quilts</h5>
+                    <p class="card-text">Stylish designs meet cozy comfort, enhancing any space beautifully.</p>
+                    <a href="blogs/bedquilts_blog.html" class="btn btn-read-more ">Read More</a>
+                  </div>
+                </div>
+              </div>
+              <!-- Card 2 -->
+              <div class="col wow fadeInUp">
+                <div class="card h-100 d-flex flex-row">
+                  <img src="https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/649350s.jpg?im=Resize,width=750" class="img-fluid w-50" alt="Card Image">
+                  <div class="card-body">
+                    <h5 class="card-title">Day to Day benefits of using Bigmoon's Cotton Towels</h5>
+                    <p class="card-text">Soft, absorbent, and durable for everyday use.</p>
+                    <a href="blogs/cottontowles_blog.html" class="btn btn-read-more">Read More</a>
+                  </div>
+                </div>
+              </div>
+              <!-- Card 3 -->
+              <div class="col wow fadeInUp">
+                <div class="card h-100 d-flex flex-row">
+                  <img src="https://m.media-amazon.com/images/I/619hxkVJWgL._AC_SX148_SY213_QL70_.jpg" class="img-fluid w-50" alt="Card Image">
+                  <div class="card-body">
+                    <h5 class="card-title">Importance of Bigmoon products for Baby Essentials</h5>
+                    <p class="card-text">Safe, gentle, and reliable for your baby’s care.</p>
+                    <a href="blogs/babyessentials_blog.html" class="btn btn-read-more">Read More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+        <!-- Footer Start -->
+        <div class="container-fluid text-white-50 footer pt-5 mt-5 wow fadeIn" style="background-color: #103741 !important;" data-wow-delay="0.1s">
+            <div class="container py-5" style="padding-left: 35px;">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Our Location</h3>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>66, Mettu Street, Karur, TN, India</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9600362903</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>bigmoonrknd@gmail.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href="mailto:bigmoonrknd@gmail.com">
+                                <i class="fas fa-envelope" style="font-size: 20px;"></i>
+                            </a>
+                            <a class="btn btn-outline-light btn-social" href="https://wa.me/+919600362903" target="_blank">
+                                <i class="fab fa-whatsapp" style="font-size: 20px;"></i>
+                            </a>
+                            
+                            <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/bigmoon_homify/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.amazon.in/s?me=A22U1QWK6VZ1QN&fbclid=PAZXh0bgNhZW0CMTEAAaaj4vKNNPZNJ494Q7AhNWU3b2j92mFRfiVCF8ildciR1ArwVV1nVbdyF1s_aem_ZmFrZWR1bW15MTZieXRlcw&ref=sf_seller_app_share_new">
+                                <i class="fab fa-amazon"></i>
+                            </a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.flipkart.com">
+                                <img src="img/flipkart.png" alt="Flipkart" style="width: 20px; height: 20px;">
+                            </a>
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Home Furnishings</h3>
+                        <a class="btn btn-link text-white-50" href="#">Cotton Towels</a>
+                        <a class="btn btn-link text-white-50" href="#">Pillow Covers</a>
+                        <a class="btn btn-link text-white-50" href="#">Table Covers</a>
+                        <a class="btn btn-link text-white-50" href="#">Cotton Bedsheets</a>
+                        <a class="btn btn-link text-white-50" href="#">Bed Quilts</a>
+                        <a class="btn btn-link text-white-50" href="#">Cosmetic Pouch</a>
+                        <a class="btn btn-link text-white-50" href="#">Travel Pouch</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Baby Essentials</h3>
+                        <a class="btn btn-link text-white-50" href="#">Baby Swadles</a>
+                        <a class="btn btn-link text-white-50" href="#">Baby Wipes</a>
+                        <a class="btn btn-link text-white-50" href="#">Baby Napkins</a>
+                        <a class="btn btn-link text-white-50" href="#">Baby Towels</a>
+                        <a class="btn btn-link text-white-50" href="#">Baby Blankets</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Newsletter</h3>
+                        <p class="text-white-50" style="color: #777;">For all latest product updates, let us know your mail!</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control pp bg-transparent w-100 py-3 ps-4 pe-5" style="color: #fcfafa;" type="text" placeholder="Your email">
+                            <button type="button" class="btn py-2 position-absolute top-0 end-0 mt-2 me-2" style="background-color: #1dcce0 ;color: white;">Enter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer bottom section -->
+            <div class="container text-center pt-4 pb-4">
+                <div class="copyright">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 text-center mb-3 mb-md-0">
+                            <a class="border-bottom" href="index.html" style="text-decoration: none;">BigMoon Rknd</a>, Designed &
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            All Rights Reserved by &copy; Jayalakshmi & Durga</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg  btn-lg-square back-to-top" style="background-color: #1dcce0 ;color: white;"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModalBtn" class="close">&times;</span>
+            <div class="modal-header">
+                <img src="img/orderhistory_banner.png" alt="Modal Header Image" class="modal-image">
+            </div>
+            <div class="modal-body">
+                <form id="userDetailsForm">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="tel" id="mobile" name="mobile" required>
+                    <center>
+                        <button type="submit" style="align-items: center; justify-content: center;">Submit</button>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('modal');
+        const openModalBtn = document.getElementById('openModalBtn'); // Correctly reference the button
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        
+        // Show the modal
+        openModalBtn.onclick = function () {
+            modal.style.display = 'block';
+        };
+        
+        // Close the modal
+        closeModalBtn.onclick = function () {
+            modal.style.display = 'none';
+        };
+        
+        // Close the modal if user clicks outside of it
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+        
+        // Handle form submission
+        document.getElementById('userDetailsForm').onsubmit = function (event) {
+            event.preventDefault();
+        
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+        
+            // Send data via AJAX
+            fetch('validate_user.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, mobile }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        // Redirect to order history page with fetched data
+                        window.location.href = 'orderhistory.php?email=' + encodeURIComponent(email) + '&mobile=' + encodeURIComponent(mobile);
+           
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => console.error('Error:', error));
+        };
+        </script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+ 
+</body>
+
+</html>
