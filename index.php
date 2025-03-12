@@ -474,20 +474,20 @@ if (!isset($_SESSION['username'])) {
 <!-- Divider -->
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Project Creation -->
-<li class="nav-item l">
+<!-- <li class="nav-item l">
     <a class="nav-link k" href="nursecreation.php" style="color: black;">
         <i class="fas  fa-user-nurse" style="font-size:16px"></i>
         <span>Nurse Creation</span>
     </a>
-</li>
-<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
+</li> -->
+<!-- <div class="sidebar-divider" style="margin-bottom: 3px;"></div> -->
 <!-- Nav Item - Daily Updates -->
-<li class="nav-item l">
+<!-- <li class="nav-item l">
     <a class="nav-link k" href="doctorcreation.php" style="color: black;">
         <i class="fas fa-user-md" style="font-size:16px"></i>
         <span>Doctor Creation</span>
     </a>
-</li>
+</li> -->
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Work Reports -->
 <!-- <li class="nav-item l">

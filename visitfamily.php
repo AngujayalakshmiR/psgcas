@@ -412,7 +412,7 @@
 
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: white;">
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="patientcreation.php">
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="dailyupdatesfamily.php">
     <div class="sidebar-brand-icon" style='font-size:15px'>Healstro</div>
     <div class="sidebar-brand-text mx-2" style='font-size:15px'>DASHBOARD</div>
 </a>
@@ -428,12 +428,12 @@
     </a>
 </li> -->
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
-<li class="nav-item l active " style="padding:0px;">
-    <a class="nav-link k" href="patientcreation.php" style="color: white;">
-        <i class="fas  fa-procedures" style="font-size:16px"></i>
-        <span>Patient Creation</span>
+<li class="nav-item l  " style="padding:0px;">
+    <a class="nav-link k" href="dailyupdatesfamily.php" style="color: white;">
+        <i class="fas fa-calendar-check" style="font-size:16px"></i>
+        <span>Daily Updates</span>
     </a>
-</li><br>
+</li>
 <!-- Divider -->
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Master -->
@@ -456,20 +456,22 @@
 <!-- Divider -->
 <!-- <div class="sidebar-divider" style="margin-bottom: 3px;"></div> -->
 <!-- Nav Item - Project Creation -->
-<!-- <li class="nav-item l">
-    <a class="nav-link k" href="nursecreation.php" style="color: black;">
-        <i class="fas  fa-user-nurse" style="font-size:16px"></i>
-        <span>Nurse Creation</span>
+<li class="nav-item l active">
+    <a class="nav-link k" href="visitfamily.php" style="color: black;">
+        <i class="fas  fa-stethoscope" style="font-size:16px"></i>
+        <span>Doctor Visit</span>
     </a>
-</li> -->
+</li>
+<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
+
 <!-- <div class="sidebar-divider" style="margin-bottom: 3px;"></div> -->
 <!-- Nav Item - Daily Updates -->
-<!-- <li class="nav-item l active">
-    <a class="nav-link k" href="doctorcreation.php" style="color: black;">
-        <i class="fas fa-user-md" style="font-size:16px"></i>
-        <span>Doctor Creation</span>
+<li class="nav-item l">
+    <a class="nav-link k" href="surgeryfamily.php" style="color: black;">
+        <i class="fas fa-notes-medical" style="font-size:16px"></i>
+        <span>Surgery Update</span>
     </a>
-</li> -->
+</li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Work Reports -->
 <!-- <li class="nav-item l">
@@ -479,7 +481,7 @@
     </a>
 </li><br> -->
 <!-- Divider -->
-<div class="sidebar-divider d-none d-md-block"></div>
+<div class="sidebar-divider d-none d-md-block"></div><br><br>
 <!-- Sidebar Toggler -->
 <div class="text-center d-none d-md-inline">
     <button class="rounded-circle side border-0" id="sidebarToggle"></button>
@@ -504,7 +506,7 @@
   <div class="mr-auto d-flex align-items-center pl-3 py-2">
     <h4 class="text-dark font-weight-bold mr-4" 
         style="color: rgb(15,29,64); margin-top: 5px;">
-        Patient Creation
+        Doctor Visit
     </h4>
   </div>
    <!-- Topbar Navbar -->
@@ -537,51 +539,8 @@
   <!-- (Other topbar items can go here) -->
   
 </nav>
-
+<br><br>
 <div class="container-fluid">
-<div class="container mb-4 mt-4" style="background: white; border-radius: 25px; border: 2px solid rgb(0, 148, 255);">
-<div class="column">
-    <div class="row">
-        <!-- Left Section (20% width for the button) -->
-       
-        <!-- Right Section (80% width for form fields) -->
-        <div class="col-md-12">
-        <form id="customerForm" class="row g-3 mt-3">
-        <div class="col-md-4 pb-1">
-           
-            <input type="text" class="form-control mb-2" id="name" placeholder="Enter Name" required>
-            <input type="text" class="form-control mb-2" id="age" placeholder="Enter Age" required>
-            <input type="text" class="form-control mb-2" id="contact" placeholder="Enter Contact" required>
-
-        </div>
-
-        <div class="col-md-4 pb-1">
-        <input type="text" class="form-control mb-2" id="address" placeholder="Enter Address" required>
-        <input type="text" class="form-control mb-2" id="height" placeholder="Enter Height" required>
-        <input type="text" class="form-control mb-2" id="weight" placeholder="Enter Weight" required>
-
-        </div>
-
-        <div class="col-md-4 pb-1">
-        <input type="text" class="form-control mb-2" id="bedno" placeholder="Enter Bedno" required>
-        <input type="text" class="form-control mb-2" id="username" placeholder="Enter Username" required>
-        <input type="text" class="form-control mb-2" id="password" placeholder="Enter Password" required>
-
-    </div>
-    </form>
-</div>
-    </div></div>
-<div class="column">
-    <div class="pb-2 d-flex justify-content-sm-end justify-content-center align-items-center">
-        <button type="submit" class="btn" id="reportbtn"
-            style="background: rgb(0, 148, 255); border-radius: 25px; color: white;">
-            <i class="fas fa-user"></i>&nbsp; Add Patient
-        </button>
-
-    </div>
-
-
-</div></div>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -592,7 +551,7 @@
     text-overflow: ellipsis;
     color: rgb(23, 25, 28);
     font-size: 16px;
-    font-weight: 500;"><b>Patient Details</b> 
+    font-weight: 500;"><b>Doctor Visit</b> 
         <span class="header-counter">0</span>  <!-- Counter next to heading -->
 </p>
        
@@ -603,47 +562,26 @@
             <thead>
                 <tr class="thead">
                     <th>S.no</th>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Contact</th>
-                    <th>Address</th>
-                    <th>Height</th>
-                    <th>Weight</th>
-
-                    <th>BedNo</th>
-
-                    <th>Username </th>
-                    <th>Password </th>
-
-                    <th>Action </th>
-
-
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Repost</th>
                 </tr>
             </thead>
-            <tbody id="customerTableBody">
+            <tbody id="visitTableBody">
             <?php
         include("dbconn.php"); // Ensure database connection
 
-        $query = "SELECT * FROM patient ORDER BY ID DESC";
+        $query = "SELECT * FROM visitfeedback ORDER BY ID DESC";
         $result = mysqli_query($conn, $query);
         $sno = 1;
 
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>
-                    <td>{$sno}</td>
-                            <td>{$row['name']}</td>
-                            <td>{$row['age']}</td>
-                            <td>{$row['contact']}</td>
-                            <td>{$row['address']}</td>
-                            <td>{$row['height']}</td>
-                            <td>{$row['weight']}</td>
-                            <td>{$row['bedno']}</td>
-                            <td>{$row['username']}</td>
-                            <td>{$row['password']}</td>
-                            <td class='action-buttons'>
-                                <button class='btn-action btn-edit' data-id='{$row['ID']}'><i class='fas fa-edit'></i></button>
-                                <button class='btn-action btn-delete' data-id='{$row['ID']}'><i class='fas fa-trash-alt' style='color: rgb(238, 153, 129);'></i></button>
-                            </td>
+                            <td>{$sno}</td>
+                            <td>{$row['date']}</td>
+                            <td>{$row['time']}</td>
+                            <td>{$row['feedback']}</td>
+                            
                 </tr>";
             $sno++;
         }
@@ -743,50 +681,10 @@
 $(document).ready(function () {
     loadPatients(); // Fetch data when the page loads
 
-    $("#reportbtn").click(function (e) { 
-        e.preventDefault();
-
-        // Validate form before sending AJAX request
-        if (!$("#customerForm")[0].checkValidity()) {
-            $("#customerForm")[0].reportValidity();
-            return;
-        }
-
-        var patientData = {
-            name: $("#name").val(),
-            age: $("#age").val(),
-            contact: $("#contact").val(),
-            address: $("#address").val(),
-            height: $("#height").val(),
-            weight: $("#weight").val(),
-            bedno: $("#bedno").val(),
-            username: $("#username").val(),
-            password: $("#password").val(),
-        };
-
-        $.ajax({
-            url: "add_patient.php",
-            type: "POST",
-            data: patientData,
-            success: function (response) {
-                Swal.fire({
-                    title: "Success!",
-                    text: "Patient has been added successfully.",
-                    icon: "success",
-                    confirmButtonColor: "rgb(0, 148, 255)",
-                    confirmButtonText: "OK"
-                }).then(() => {
-                    location.reload();
-                });
-
-                $("#customerForm")[0].reset();
-            }
-        });
-    });
 
     function loadPatients() { 
         $.ajax({
-            url: "add_patient.php",
+            url: "doctorvisitbackend.php",
             type: "GET",
             dataType: "json",
             success: function (data) {
@@ -795,9 +693,9 @@ $(document).ready(function () {
                 }
 
                 if (data.count > 0) {
-                    $("#customerTableBody").html(data.tableData);
+                    $("#visitTableBody").html(data.tableData);
                 } else {
-                    $("#customerTableBody").html(`
+                    $("#visitTableBody").html(`
                         <tr>
                             <td colspan="11" class="text-center">No patients found</td>
                         </tr>
@@ -812,102 +710,6 @@ $(document).ready(function () {
             }
         });
     }
-
-    $(document).on("click", ".btn-delete", function () {
-        var patientId = $(this).data("id");
-
-        Swal.fire({
-            title: "Are you sure?",
-            text: "This action cannot be undone!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "rgb(0, 148, 255)",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Delete",
-            cancelButtonText: "No, Cancel"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "add_patient.php",
-                    type: "POST",
-                    data: { delete: true, id: patientId },
-                    success: function () {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Patient has been removed.",
-                            icon: "success",
-                            confirmButtonColor: "rgb(0, 148, 255)",
-                            confirmButtonText: "OK"
-                        }).then(() => {
-                            location.reload();
-                        });
-                    }
-                });
-            }
-        });
-    });
-
-    $(document).on("click", ".btn-edit", function () {
-        var patientId = $(this).data("id");
-
-        $.ajax({
-            url: "add_patient.php",
-            type: "POST",
-            data: { edit: true, id: patientId },
-            dataType: "json",
-            success: function (patient) {
-                $("#name").val(patient.name);
-                $("#age").val(patient.age);
-                $("#contact").val(patient.contact);
-                $("#address").val(patient.address);
-                $("#height").val(patient.height);
-                $("#weight").val(patient.weight);
-                $("#bedno").val(patient.bedno);
-                $("#username").val(patient.username);
-                $("#password").val(patient.password);
-
-                $("#reportbtn").off("click").text("Update Patient").attr("data-update", patientId);
-            }
-        });
-    });
-
-    $(document).on("click", "#reportbtn[data-update]", function (e) {
-        e.preventDefault();
-        var patientId = $(this).attr("data-update");
-
-        var updatedData = {
-            update: true,
-            id: patientId,
-            name: $("#name").val(),
-            age: $("#age").val(),
-            contact: $("#contact").val(),
-            address: $("#address").val(),
-            height: $("#height").val(),
-            weight: $("#weight").val(),
-            bedno: $("#bedno").val(),
-            username: $("#username").val(),
-            password: $("#password").val(),
-        };
-
-        $.ajax({
-            url: "add_patient.php",
-            type: "POST",
-            data: updatedData,
-            success: function () {
-                Swal.fire({
-                    title: "Updated!",
-                    text: "Patient details have been updated.",
-                    icon: "success",
-                    confirmButtonColor: "rgb(0, 148, 255)",
-                    confirmButtonText: "OK"
-                }).then(() => {
-                    location.reload();
-                });
-
-                $("#customerForm")[0].reset();
-            }
-        });
-    });
 
 });
 
