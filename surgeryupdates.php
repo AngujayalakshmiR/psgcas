@@ -428,10 +428,17 @@
     </a>
 </li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
-<li class="nav-item l" style="padding:0px;">
-    <a class="nav-link k" href="doctorupdate.php" style="color: white;">
+<li class="nav-item l " style="padding:0px;">
+    <a class="nav-link k" href="doctorupdatemeals.php" style="color: white;">
         <i class="fas  fa-procedures" style="font-size:16px"></i>
-        <span>Daily Updates</span>
+        <span>Daily Updates - Meals</span>
+    </a>
+</li>
+<div class="sidebar-divider" style="margin-bottom: 3px;"></div>
+<li class="nav-item l " style="padding:0px;">
+    <a class="nav-link k" href="doctorupdatemedication.php" style="color: white;">
+        <i class="fas  fa-procedures" style="font-size:16px"></i>
+        <span>Daily Updates - Medicine</span>
     </a>
 </li>
 <!-- Divider -->
