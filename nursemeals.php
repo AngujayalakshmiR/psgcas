@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
-    <title>Healstro</title>
+    <title>Task Manager</title>
 <!-- Load jQuery first -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Custom fonts for this template -->
@@ -412,7 +412,7 @@
 
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: white;">
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="patientcreation.php">
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
     <div class="sidebar-brand-icon" style='font-size:15px'>Healstro</div>
     <div class="sidebar-brand-text mx-2" style='font-size:15px'>DASHBOARD</div>
 </a>
@@ -420,56 +420,26 @@
 
 <!-- Divider -->
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
-<!-- Nav Item - Dashboard -->
-<!-- <li class="nav-item l ">
-    <a class="nav-link k" href="index.php" style="color: white;">
+<li class="nav-item l ">
+    <a class="nav-link k" href="nursedashboard.php" style="color: white;">
         <i class="fas fa-fw fa-tachometer-alt" style="font-size:16px"></i>
         <span>Dashboard</span>
     </a>
-</li> -->
+</li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
-<li class="nav-item l active " style="padding:0px;">
-    <a class="nav-link k" href="patientcreation.php" style="color: white;">
+<li class="nav-item l active" style="padding:0px;">
+    <a class="nav-link k" href="nursemeals.php" style="color: white;">
         <i class="fas  fa-procedures" style="font-size:16px"></i>
-        <span>Patient Creation</span>
+        <span>Daily Updates - Meals</span>
     </a>
-</li><br>
-<!-- Divider -->
+</li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
-<!-- Nav Item - Master -->
-<!-- <li class="nav-item l master">
-    <a class="nav-link k collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo" style="color: white;">
-        <i class="fas fa-fw fa-clipboard-list" style="font-size:16px"></i>
-        <span>Master</span>
+<li class="nav-item l " style="padding:0px;">
+    <a class="nav-link k" href="nursemedicine.php" style="color: white;">
+        <i class="fas  fa-procedures" style="font-size:16px"></i>
+        <span>Daily Updates - Medicine</span>
     </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="z-index: 1000;">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item " href="customer.php" style="color: black;">Customer</a>
-            <a class="collapse-item " href="employee.php" style="color: black;">Employee</a>
-            <a class="collapse-item" href="designation.php" style="color: black;">Designation</a>
-            <a class="collapse-item" href="projecttype.php" style="color: black;">Project Type</a>
-            <a class="collapse-item" href="followuptype.php" style="color: black;">FollowUp Type</a>
-        </div>
-    </div>
-</li>  -->
-<!-- Divider -->
-<!-- <div class="sidebar-divider" style="margin-bottom: 3px;"></div> -->
-<!-- Nav Item - Project Creation -->
-<!-- <li class="nav-item l">
-    <a class="nav-link k" href="nursecreation.php" style="color: black;">
-        <i class="fas  fa-user-nurse" style="font-size:16px"></i>
-        <span>Nurse Creation</span>
-    </a>
-</li> -->
-<!-- <div class="sidebar-divider" style="margin-bottom: 3px;"></div> -->
-<!-- Nav Item - Daily Updates -->
-<!-- <li class="nav-item l active">
-    <a class="nav-link k" href="doctorcreation.php" style="color: black;">
-        <i class="fas fa-user-md" style="font-size:16px"></i>
-        <span>Doctor Creation</span>
-    </a>
-</li> -->
+</li>
 <div class="sidebar-divider" style="margin-bottom: 3px;"></div>
 <!-- Nav Item - Work Reports -->
 <!-- <li class="nav-item l">
@@ -485,174 +455,114 @@
     <button class="rounded-circle side border-0" id="sidebarToggle"></button>
 </div>
 </ul>
-        <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow" style="background:white;">
-                    
-<!-- Sidebar Toggle (Topbar) -->
-<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-    <i class="fa fa-bars"></i>
-</button>
-  <!-- Create Customer Button -->
-  <div class="mr-auto d-flex align-items-center pl-3 py-2">
-    <h4 class="text-dark font-weight-bold mr-4" 
-        style="color: rgb(15,29,64); margin-top: 5px;">
-        Patient Creation
-    </h4>
-  </div>
-   <!-- Topbar Navbar -->
-   <ul class="navbar-nav ml-auto">
-
-
-
-<div class="topbar-divider d-none d-sm-block"></div>
-
-<!-- Nav Item - User Information -->
-<li class="nav-item dropdown no-arrow">
-    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img class="img-profile rounded-circle"
-            src="img/p.png" style="width: 2rem;height: 2rem;">
-    </a>
-    <!-- Dropdown - User Information -->
-    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-        aria-labelledby="userDropdown">
-        
-        
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-            Logout
-        </a>
-    </div>
-</li>
-
-</ul>
   <!-- (Other topbar items can go here) -->
   
 </nav>
 
 <div class="container-fluid">
 <div class="container mb-4 mt-4" style="background: white; border-radius: 25px; border: 2px solid rgb(0, 148, 255);">
-<div class="column">
-    <div class="row">
-        <!-- Left Section (20% width for the button) -->
-       
-        <!-- Right Section (80% width for form fields) -->
+    <div class="column">
         <div class="col-md-12">
-        <form id="customerForm" class="row g-3 mt-3">
-        <div class="col-md-4 pb-1">
-           
-            <input type="text" class="form-control mb-2" id="name" placeholder="Enter Name" required>
-            <input type="text" class="form-control mb-2" id="age" placeholder="Enter Age" required>
-            <input type="text" class="form-control mb-2" id="contact" placeholder="Enter Contact" required>
+            <form id="dailyUpdateForm" class="row g-3 mt-3">
+                <div class="col-md-4 pb-1">
+                    <input type="datetime-local" class="form-control mb-2" id="datetime" required>
+                </div>
 
+                <div class="col-md-4 pb-1">
+                    <input type="file" class="form-control mb-2" id="proof" accept="image/*,application/pdf" required>
+                </div>
+
+                <div class="col-md-4 pb-1">
+                    <input type="text" class="form-control mb-2" id="description" placeholder="Enter Description" required>
+                </div>
+            </form>
         </div>
-
-        <div class="col-md-4 pb-1">
-        <input type="text" class="form-control mb-2" id="address" placeholder="Enter Address" required>
-        <input type="text" class="form-control mb-2" id="height" placeholder="Enter Height" required>
-        <input type="text" class="form-control mb-2" id="weight" placeholder="Enter Weight" required>
-
-        </div>
-
-        <div class="col-md-4 pb-1">
-        <input type="text" class="form-control mb-2" id="bedno" placeholder="Enter Bedno" required>
-        <input type="text" class="form-control mb-2" id="username" placeholder="Enter Username" required>
-        <input type="text" class="form-control mb-2" id="password" placeholder="Enter Password" required>
-
     </div>
-    </form>
+    <div class="column">
+        <div class="pb-2 d-flex justify-content-sm-end justify-content-center align-items-center">
+            <button type="submit" class="btn" id="submitUpdate" style="background: rgb(0, 148, 255); border-radius: 25px; color: white;">
+                <i class="fas fa-plus"></i>&nbsp; Add Update
+            </button>
+        </div>
+    </div>
 </div>
-    </div></div>
-<div class="column">
-    <div class="pb-2 d-flex justify-content-sm-end justify-content-center align-items-center">
-        <button type="submit" class="btn" id="reportbtn"
-            style="background: rgb(0, 148, 255); border-radius: 25px; color: white;">
-            <i class="fas fa-user"></i>&nbsp; Add Patient
-        </button>
-
-    </div>
 
 
-</div></div>
 
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-        <div class="card-header py-3">
-        <p class="m-0" style="font-size: 16px;color:rgb(23, 25, 28);font-style: normal;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: rgb(23, 25, 28);
-    font-size: 16px;
-    font-weight: 500;"><b>Patient Details</b> 
-        <span class="header-counter">0</span>  <!-- Counter next to heading -->
-</p>
-       
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <p class="m-0 font-weight-bold" style="font-size: 16px;">Daily Updates </p>
     </div>
     <div class="card-body">
-    <div class="table-responsive">
-        <table class="table table-bordered text-center" style="font-size:14px;" id="dataTable" width="100%">
-            <thead>
-                <tr class="thead">
-                    <th>S.no</th>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Contact</th>
-                    <th>Address</th>
-                    <th>Height</th>
-                    <th>Weight</th>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center" style="font-size:14px;" id="updatesTable">
+                <thead>
+                    <tr>
+                        <th>S.no</th>
+                        <th>Date & Time</th>
+                        <th>Proof</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="surgeryTableBody">
+    <?php
+    include("dbconn.php"); // Ensure database connection
 
-                    <th>BedNo</th>
+    $query = "SELECT * FROM dailyupdatesmeals ORDER BY ID DESC";
+    $result = mysqli_query($conn, $query);
+    $sno = 1;
 
-                    <th>Username </th>
-                    <th>Password </th>
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>
+                <td>{$sno}</td>
+                <td>{$row['datetime']}</td>
+                <td>
+                    <a href='#' data-toggle='modal' data-target='#imageModal' data-image='{$row['proof']}'>
+                        <img src='{$row['proof']}' alt='Proof Image' style='width:50px; height:50px; cursor:pointer;'>
+                    </a>
+                </td>
+                <td>{$row['description']}</td>
+                <td>{$row['status']}</td>
+            </tr>";
+        $sno++;
+    }
+    ?>
+</tbody>
+</table>
 
-                    <th>Action </th>
-
-
-                </tr>
-            </thead>
-            <tbody id="customerTableBody">
-            <?php
-        include("dbconn.php"); // Ensure database connection
-
-        $query = "SELECT * FROM patient ORDER BY ID DESC";
-        $result = mysqli_query($conn, $query);
-        $sno = 1;
-
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>
-                    <td>{$sno}</td>
-                            <td>{$row['name']}</td>
-                            <td>{$row['age']}</td>
-                            <td>{$row['contact']}</td>
-                            <td>{$row['address']}</td>
-                            <td>{$row['height']}</td>
-                            <td>{$row['weight']}</td>
-                            <td>{$row['bedno']}</td>
-                            <td>{$row['username']}</td>
-                            <td>{$row['password']}</td>
-                            <td class='action-buttons'>
-                                <button class='btn-action btn-edit' data-id='{$row['ID']}'><i class='fas fa-edit'></i></button>
-                                <button class='btn-action btn-delete' data-id='{$row['ID']}'><i class='fas fa-trash-alt' style='color: rgb(238, 153, 129);'></i></button>
-                            </td>
-                </tr>";
-            $sno++;
-        }
-        ?>
-            </tbody>
-        </table>
+<!-- Bootstrap Modal for Image Preview -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" class="img-fluid" alt="Proof Image">
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- jQuery Script to Load Image in Modal -->
+<script>
+    $(document).ready(function() {
+        $('#imageModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var imageUrl = button.data('image');
+            $('#modalImage').attr('src', imageUrl);
+        });
+    });
+</script>
+
         </div>
+    </div>
+</div>
 
     </div>
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -680,14 +590,6 @@
             <!-- End of Footer -->
 
         </div>
-        <!-- End of Content Wrapper -->
-        <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                       
-                    </div>
-                </div>
-            </footer>
     </div>
     <!-- End of Page Wrapper -->
 
@@ -715,7 +617,6 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Include SweetAlert2 -->
 
    <!-- jQuery (Must be loaded first) -->
    <script src="vendor/jquery/jquery.min.js"></script>
@@ -741,52 +642,89 @@
 </script>
 <script>
 $(document).ready(function () {
-    loadPatients(); // Fetch data when the page loads
+    loadUpdates(); // Fetch data on page load
 
-    $("#reportbtn").click(function (e) { 
+    $("#submitUpdate").click(function (e) {
         e.preventDefault();
 
-        // Validate form before sending AJAX request
-        if (!$("#customerForm")[0].checkValidity()) {
-            $("#customerForm")[0].reportValidity();
-            return;
-        }
-
-        var patientData = {
-            name: $("#name").val(),
-            age: $("#age").val(),
-            contact: $("#contact").val(),
-            address: $("#address").val(),
-            height: $("#height").val(),
-            weight: $("#weight").val(),
-            bedno: $("#bedno").val(),
-            username: $("#username").val(),
-            password: $("#password").val(),
-        };
+        var formData = new FormData();
+        formData.append("datetime", $("#datetime").val());
+        formData.append("proof", $("#proof")[0].files[0]);
+        formData.append("description", $("#description").val());
 
         $.ajax({
-            url: "add_patient.php",
+            url: "nursemealsBackend.php",
             type: "POST",
-            data: patientData,
-            success: function (response) {
-                Swal.fire({
-                    title: "Success!",
-                    text: "Patient has been added successfully.",
-                    icon: "success",
-                    confirmButtonColor: "rgb(0, 148, 255)",
-                    confirmButtonText: "OK"
-                }).then(() => {
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function () {
+                Swal.fire("Success!", "Update added successfully.", "success").then(() => {
                     location.reload();
                 });
-
-                $("#customerForm")[0].reset();
             }
         });
     });
 
+    function loadUpdates() {
+        $.ajax({
+            url: "nursemealsBackend.php",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if ($.fn.DataTable.isDataTable("#updatesTable")) {
+                    $("#updatesTable").DataTable().destroy();
+                }
+
+                if (data.count > 0) {
+                    $("#updatesTableBody").html(data.tableData);
+                } else {
+                    $("#updatesTableBody").html('<tr><td colspan="6" class="text-center">No updates found</td></tr>');
+                }
+
+                $("#updatesTable").DataTable();
+                $(".header-counter").text(data.count);
+            }
+        });
+    }
+
+    $(document).on("click", ".btn-delete", function () {
+        var updateId = $(this).data("id");
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This action cannot be undone!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "rgb(0, 148, 255)",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Delete"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "nursemealsBackend.php",
+                    type: "POST",
+                    data: { delete: true, id: updateId },
+                    success: function () {
+                        Swal.fire("Deleted!", "Update has been removed.", "success").then(() => {
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+    });
+});
+
+</script>
+<script>
+$(document).ready(function () {
+    loadPatients(); // Fetch data when the page loads
+
+
     function loadPatients() { 
         $.ajax({
-            url: "add_patient.php",
+            url: "nursemealsBackend.php",
             type: "GET",
             dataType: "json",
             success: function (data) {
@@ -795,9 +733,9 @@ $(document).ready(function () {
                 }
 
                 if (data.count > 0) {
-                    $("#customerTableBody").html(data.tableData);
+                    $("#surgeryTableBody").html(data.tableData);
                 } else {
-                    $("#customerTableBody").html(`
+                    $("#surgeryTableBody").html(`
                         <tr>
                             <td colspan="11" class="text-center">No patients found</td>
                         </tr>
@@ -813,106 +751,9 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on("click", ".btn-delete", function () {
-        var patientId = $(this).data("id");
-
-        Swal.fire({
-            title: "Are you sure?",
-            text: "This action cannot be undone!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "rgb(0, 148, 255)",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Delete",
-            cancelButtonText: "No, Cancel"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "add_patient.php",
-                    type: "POST",
-                    data: { delete: true, id: patientId },
-                    success: function () {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Patient has been removed.",
-                            icon: "success",
-                            confirmButtonColor: "rgb(0, 148, 255)",
-                            confirmButtonText: "OK"
-                        }).then(() => {
-                            location.reload();
-                        });
-                    }
-                });
-            }
-        });
-    });
-
-    $(document).on("click", ".btn-edit", function () {
-        var patientId = $(this).data("id");
-
-        $.ajax({
-            url: "add_patient.php",
-            type: "POST",
-            data: { edit: true, id: patientId },
-            dataType: "json",
-            success: function (patient) {
-                $("#name").val(patient.name);
-                $("#age").val(patient.age);
-                $("#contact").val(patient.contact);
-                $("#address").val(patient.address);
-                $("#height").val(patient.height);
-                $("#weight").val(patient.weight);
-                $("#bedno").val(patient.bedno);
-                $("#username").val(patient.username);
-                $("#password").val(patient.password);
-
-                $("#reportbtn").off("click").text("Update Patient").attr("data-update", patientId);
-            }
-        });
-    });
-
-    $(document).on("click", "#reportbtn[data-update]", function (e) {
-        e.preventDefault();
-        var patientId = $(this).attr("data-update");
-
-        var updatedData = {
-            update: true,
-            id: patientId,
-            name: $("#name").val(),
-            age: $("#age").val(),
-            contact: $("#contact").val(),
-            address: $("#address").val(),
-            height: $("#height").val(),
-            weight: $("#weight").val(),
-            bedno: $("#bedno").val(),
-            username: $("#username").val(),
-            password: $("#password").val(),
-        };
-
-        $.ajax({
-            url: "add_patient.php",
-            type: "POST",
-            data: updatedData,
-            success: function () {
-                Swal.fire({
-                    title: "Updated!",
-                    text: "Patient details have been updated.",
-                    icon: "success",
-                    confirmButtonColor: "rgb(0, 148, 255)",
-                    confirmButtonText: "OK"
-                }).then(() => {
-                    location.reload();
-                });
-
-                $("#customerForm")[0].reset();
-            }
-        });
-    });
-
 });
 
 </script>
-
 </body>
 
 </html>

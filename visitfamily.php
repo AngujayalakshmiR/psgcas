@@ -622,7 +622,7 @@
         <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                       <h6> <b>Copyright &copy; Knock the Globe Technologies 2025</b></h6>
+                       
                     </div>
                 </div>
             </footer>

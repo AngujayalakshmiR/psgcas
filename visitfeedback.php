@@ -699,7 +699,7 @@ countryDropdown.addEventListener("change", function() {
     text-overflow: ellipsis;
     color: rgb(23, 25, 28);
     font-size: 16px;
-    font-weight: 500;"><b>Customer Details</b> 
+    font-weight: 500;"><b>Doctor Visit Details</b> 
         <span class="header-counter">0</span>  <!-- Counter next to heading -->
 </p>
        
@@ -771,14 +771,7 @@ countryDropdown.addEventListener("change", function() {
             <!-- End of Footer -->
 
         </div>
-        <!-- End of Content Wrapper -->
-        <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                       <h6> <b>Copyright &copy; Knock the Globe Technologies 2025</b></h6>
-                    </div>
-                </div>
-            </footer>
+       
     </div>
     <!-- End of Page Wrapper -->
 
